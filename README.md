@@ -8,7 +8,7 @@ Front end for using the quadcopter component microservice.
 ## Getting Started
 1. Clone this directory with `https://github.com/n7down/Forge.git`
 2. Run `dotnet run` from given directory
-3. Microservice will be running on `localhost:5001`
+3. Website will be running on `localhost:5001`
 
 ## Todo
 - [ ] Get this to work with Docker
