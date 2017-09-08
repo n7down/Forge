@@ -1,7 +1,7 @@
 {
   "name": "Forge",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "test": "karma start ClientApp/test/karma.conf.js",
     "dev": "cross-env ASPNETCORE_ENVIRONMENT=Development dotnet run"
