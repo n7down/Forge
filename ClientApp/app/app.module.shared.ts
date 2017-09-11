@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
-import { QuadAPIComponent } from './components/quadapi/quadapi.component';
+import { QuadcopterWorkbenchAPIComponent } from './components/qcwapi/qcwapi.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 
@@ -18,16 +18,16 @@ import { CounterComponent } from './components/counter/counter.component';
         CounterComponent,
         FetchDataComponent,
         HomeComponent,
-        QuadAPIComponent
+        QuadcopterWorkbenchAPIComponent
     ],
     imports: [
         CommonModule,
         HttpModule,
         FormsModule,
         RouterModule.forRoot([
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
+            { path: '', redirectTo: 'qcwapi', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'quadapi', component: QuadAPIComponent },
+            { path: 'qcwapi', component: QuadcopterWorkbenchAPIComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'home' }

@@ -2,10 +2,10 @@ import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 
 @Component({
-    selector: 'quadapi',
-    templateUrl: './quadapi.component.html'
+    selector: 'qcwapi',
+    templateUrl: './qcwapi.component.html'
 })
-export class QuadAPIComponent {
+export class QuadcopterWorkbenchAPIComponent {
     public forecasts: WeatherForecast[];
 
     constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {
