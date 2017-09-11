@@ -27,10 +27,10 @@ import { CounterComponent } from './components/counter/counter.component';
         RouterModule.forRoot([
             { path: '', redirectTo: 'qcwapi', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'qcwapi', component: QuadcopterWorkbenchAPIComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
-            { path: '**', redirectTo: 'home' }
+            { path: 'qcwapi', component: QuadcopterWorkbenchAPIComponent },
+            { path: '**', redirectTo: 'qcwapi' }
         ])
     ]
 })
