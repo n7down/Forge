@@ -24,7 +24,5 @@ namespace Forge.Models
         public bool VideoOut { get; set; }
         public bool Buzzer { get; set; }
         public int NumberSoftSerial { get; set; }
-        public string Size { get; set; }
-        public string MountingHoles { get; set; }
     }
 }

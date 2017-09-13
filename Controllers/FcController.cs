@@ -43,9 +43,7 @@ namespace Forge.Controllers
                 {
                     Name = "DYS F4",
                     LipoVoltage = "2S-6S",
-                    Weight = 11.2F,
-                    Size = "42x36mm",
-                    MountingHoles = "30.5x30.5mm"
+                    Weight = 11.2F
                 });
                 _context.SaveChanges();
             }
@@ -65,7 +63,7 @@ namespace Forge.Controllers
             var flightController = _context.FlightControllers.FirstOrDefault(t => t.Id == id);
             if(flightController == null)
             {
-                return NotFound();
+                return new JsonResult("{}");
             }
             return new ObjectResult(flightController);
         }
@@ -117,8 +115,6 @@ namespace Forge.Controllers
             fc.VideoOut = flightController.VideoOut;
             fc.Buzzer = flightController.Buzzer;
             fc.NumberSoftSerial = flightController.NumberSoftSerial;
-            fc.Size = flightController.Size;
-            fc.MountingHoles = flightController.MountingHoles;
 
             _context.FlightControllers.Update(fc);
             _context.SaveChanges();
