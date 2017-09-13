@@ -6,7 +6,7 @@
     <div class="col-lg-6">
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon3">http://qcwapi.com/api/</span>
-            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="fc">
+            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" [value]="input">
             <span class="input-group-btn">
                 <button (click)="request()" class="btn btn-primary" type="button">Request</button>
             </span>

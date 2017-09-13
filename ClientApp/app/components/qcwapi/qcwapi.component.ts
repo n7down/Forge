@@ -6,8 +6,10 @@ import { Http } from '@angular/http';
     templateUrl: './qcwapi.component.html'
 })
 export class QuadcopterWorkbenchAPIComponent {
-    public baseUrl: string;
-    public data: string = "no data";
+    private baseUrl: string;
+
+    public data: string;
+    public input: string = 'fc';
 
     constructor(private http: Http, @Inject('BASE_URL') baseUrl: string) {
         this.baseUrl = baseUrl;
@@ -18,7 +20,10 @@ export class QuadcopterWorkbenchAPIComponent {
     }
 
     public request() {
-        this.http.get(this.baseUrl + 'api/fc').subscribe(result => {
+
+        // TODO: this is not working - 'http://qcwapi.com/api/fc/1'
+        console.log('input: ' + this.input);
+        this.http.get(this.baseUrl + 'api/' + this.input).subscribe(result => {
             var flightControllers = result.json() as FlightController[];
             this.data = JSON.stringify(flightControllers, null, 2);
         }, error => console.error(error));
