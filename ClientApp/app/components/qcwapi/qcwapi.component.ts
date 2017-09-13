@@ -23,6 +23,7 @@ export class QuadcopterWorkbenchAPIComponent {
 
         // TODO: this is not working - 'http://qcwapi.com/api/fc/1'
         console.log('input: ' + this.input);
+        this.input = '';
         this.http.get(this.baseUrl + 'api/' + this.input).subscribe(result => {
             var flightControllers = result.json() as FlightController[];
             this.data = JSON.stringify(flightControllers, null, 2);
