@@ -1,5 +1,5 @@
 # Forge
-Front end for using the quadcopter component microservice.
+An API for Quadcopter components
 
 ## Prerequisites
 - [Git](https://git-scm.com/)
