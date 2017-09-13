@@ -12,5 +12,18 @@ Front end for using the quadcopter component microservice.
 3. Run `dotnet run` 
 4. Website will be running on `localhost:5000`
 
+## Running from Docker
+1. Install [Docker](https://docs.docker.com/engine/installation/)
+2. Run `docker build -t axe .` from the root directory of this project
+3. Run `docker run -d -p 8080:80 --name axe axe` to start the container
+4. Microservice will be running on `localhost:8080`
+
+## Possible Names
+- QuadAPI
+- QCAPI (quad components api)
+- Quad Forge
+- Quad Forgery
+- Quad Workbench
+
 ## Todo
 - [ ] Get this to work with Docker
