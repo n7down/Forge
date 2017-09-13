@@ -11,6 +11,10 @@ export class QuadcopterWorkbenchAPIComponent {
 
     constructor(private http: Http, @Inject('BASE_URL') baseUrl: string) {
         this.baseUrl = baseUrl;
+        this.http.get(this.baseUrl + 'api/fc').subscribe(result => {
+            var flightControllers = result.json() as FlightController[];
+            this.data = JSON.stringify(flightControllers, null, 2);
+        }, error => console.error(error));
     }
 
     public request() {
