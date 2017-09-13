@@ -6,7 +6,6 @@ import { Http } from '@angular/http';
     templateUrl: './qcwapi.component.html'
 })
 export class QuadcopterWorkbenchAPIComponent {
-    public forecasts: WeatherForecast[];
     public baseUrl: string;
     public data: string = "no data";
 
@@ -15,48 +14,34 @@ export class QuadcopterWorkbenchAPIComponent {
     }
 
     public request() {
-        this.http.get(this.baseUrl + 'api/SampleData/WeatherForecasts').subscribe(result => {
-
-            // TODO: setup for flight controller interface
-            this.forecasts = result.json() as WeatherForecast[];
-            this.data = JSON.stringify(this.forecasts, null, 2);
+        this.http.get(this.baseUrl + 'api/fc').subscribe(result => {
+            var flightControllers = result.json() as FlightController[];
+            this.data = JSON.stringify(flightControllers, null, 2);
         }, error => console.error(error));
-        // this.http.get(this.baseUrl + 'api/fc').subscribe(result => {
-        //     this.data = JSON.parse(result.json());
-        // }, error => console.error(error));
     }
 }
 
-interface WeatherForecast {
-    dateFormatted: string;
-    temperatureC: number;
-    temperatureF: number;
-    summary: string;
+interface FlightController {
+    id: number;
+    name: string;
+    mcu: string;
+    gyroName:string;
+    osd: boolean;
+    osdName: string;
+    pdb: boolean;
+    lipoVoltage: string;
+    sdCard: boolean;
+    weight: number;
+    numberUARTS: number;
+    barometer: boolean;
+    pwm: boolean;
+    sbus: boolean;
+    dsmTwo: boolean;
+    ledStrip: boolean;
+    videoIn: boolean;
+    videoOut: boolean;
+    buzzer: boolean;
+    numberSoftSerial: number;
+    size: string;
+    mountingHoles: string;
 }
-
-// interface FlightController {
-//     public long Id { get; set; }
-//     public string Name { get; set; }
-//     public string MCU { get; set; }
-//     public string GyroName { get; set; }
-//     public bool OSD { get; set; }
-//     public string OSDName { get; set; }
-//     public bool PDB { get; set; }
-//     public string LipoVoltage { get; set; }
-//     public bool SDCard { get; set; }
-
-//     // weight in grams
-//     public float Weight { get; set; }
-//     public int NumberUARTS { get; set; }
-//     public bool Barometer { get; set; }
-//     public bool PWM { get; set; }
-//     public bool SBUS { get; set; }
-//     public bool DSMTwo { get; set; }
-//     public bool LedStrip { get; set; }
-//     public bool VideoIn { get; set; }
-//     public bool VideoOut { get; set; }
-//     public bool Buzzer { get; set; }
-//     public int NumberSoftSerial { get; set; }
-//     public string Size { get; set; }
-//     public string MountingHoles { get; set; }
-// }
