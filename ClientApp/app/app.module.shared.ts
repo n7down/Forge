@@ -10,6 +10,8 @@ import { HomeComponent } from './components/home/home.component';
 import { QuadcopterWorkbenchAPIComponent } from './components/qcwapi/qcwapi.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
+import { DocumentationComponent } from './components/documentation/documentation.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
     declarations: [
@@ -18,7 +20,9 @@ import { CounterComponent } from './components/counter/counter.component';
         CounterComponent,
         FetchDataComponent,
         HomeComponent,
-        QuadcopterWorkbenchAPIComponent
+        QuadcopterWorkbenchAPIComponent,
+        DocumentationComponent,
+        AboutComponent
     ],
     imports: [
         CommonModule,
@@ -30,6 +34,8 @@ import { CounterComponent } from './components/counter/counter.component';
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'qcwapi', component: QuadcopterWorkbenchAPIComponent },
+            { path: 'documentation', component: DocumentationComponent },
+            { path: 'about', component: AboutComponent },
             { path: '**', redirectTo: 'qcwapi' }
         ])
     ]

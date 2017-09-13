@@ -14,9 +14,19 @@
             <ul class='nav navbar-nav'>
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/qcwapi']">
-                        <span class='glyphicon glyphicon-map-marker'></span> Quadcopter Workbench API
+                        <span class='glyphicon glyphicon-dashboard'></span> Quadcopter Workbench API
                     </a>
                 </li>
+                <li [routerLinkActive]="['link-active']">
+                        <a [routerLink]="['/documentation']">
+                            <span class='glyphicon glyphicon-education'></span> Documentation
+                        </a>
+                    </li>
+                    <li [routerLinkActive]="['link-active']">
+                            <a [routerLink]="['/about']">
+                                <span class='glyphicon glyphicon-qrcode'></span> About
+                            </a>
+                        </li>
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/home']">
                         <span class='glyphicon glyphicon-home'></span> Home
