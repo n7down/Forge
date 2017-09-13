@@ -28,3 +28,4 @@ An API for the components that are used to build quadcopters
 
 ## Todo
 - [ ] Get this to work with Docker
+- [ ] Checkout [slate](https://github.com/lord/slate) for api documentation
