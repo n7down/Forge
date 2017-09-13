@@ -16,7 +16,7 @@ Front end for using the quadcopter component microservice.
 1. Install [Docker](https://docs.docker.com/engine/installation/)
 2. Run `docker build -t forge .` from the root directory of this project
 3. Run `docker run -d -p 8080:80 --name forge forge` to start the container
-4. Microservice will be running on `localhost:8080`
+4. Website will be running on `localhost:8080`
 
 ## Possible Names
 - QuadAPI
