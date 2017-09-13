@@ -1,5 +1,5 @@
 # Forge
-An API for Quadcopter components
+An API for the components that are used to build quadcopters
 
 ## Prerequisites
 - [Git](https://git-scm.com/)
