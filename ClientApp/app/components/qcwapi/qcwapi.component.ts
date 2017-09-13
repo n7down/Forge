@@ -48,6 +48,4 @@ interface FlightController {
     videoOut: boolean;
     buzzer: boolean;
     numberSoftSerial: number;
-    size: string;
-    mountingHoles: string;
 }
