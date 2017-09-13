@@ -24,6 +24,7 @@ Front end for using the quadcopter component microservice.
 - Quad Forge
 - Quad Forgery
 - Quad Workbench
+- Quadcopter Workbench
 
 ## Todo
 - [ ] Get this to work with Docker
