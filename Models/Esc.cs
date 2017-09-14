@@ -7,11 +7,11 @@ namespace Forge.Models
         public float Weight { get; set; }
         public int MaxCurrent { get; set; }
         public bool AllInOne { get; set; }
-        public EscProtocol[] EscProtocol { get; set; }
-        public LipoVoltage LipoVoltage { get; set; }
+        public string EscProtocol { get; set; }
+        public string LipoVoltage { get; set; }
         
         // does this support BLHeli_S, BLHeli, or BLHeli_32
-        public EscFirmware EscFirmware { get; set; }
+        public string EscFirmware { get; set; }
         public string Chip { get; set; }
     }
 }

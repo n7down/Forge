@@ -7,6 +7,6 @@ namespace Forge.Models
         public string Model { get; set; }
         public string Kv { get; set; }
         public int Weight { get; set; }
-        public LipoVoltage LipoVoltage { get; set; }
+        public string LipoVoltage { get; set; }
     }
 }
