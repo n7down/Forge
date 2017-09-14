@@ -25,6 +25,8 @@ namespace Forge
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<FlightControllerContext>(opt => opt.UseInMemoryDatabase("FlightControllerList"));
+            services.AddDbContext<EscContext>(opt => opt.UseInMemoryDatabase("EscList"));
+            services.AddDbContext<BatteryContext>(opt => opt.UseInMemoryDatabase("BatteryList"));
             services.AddMvc();
         }
 
