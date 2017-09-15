@@ -4,15 +4,15 @@ using MongoDB.Driver;
 
 namespace Forge.Models 
 {
-    public interface IRepository<T>
+    public interface IBatteryRepository
     {   
-        List<T> GetAll();
+        List<Battery> GetAll();
 
-        T Get(long id);
+        Battery Get(long id);
 
-        void Add(T item);
+        void Add(Battery item);
 
-        void Update(long id, T item);
+        void Update(long id, Battery item);
 
         void Remove(long id);
     }

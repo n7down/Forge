@@ -4,15 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Forge.Models;
+using MongoDB.Driver;
 
 namespace Forge.Controllers
 {
     [Route("api/[controller]")]
     public class BatteryController : Controller
     {
-        private BatteryRepository _repository;
+        private readonly BatteryRepository _repository;
 
-        public BatteryController(BatteryRepository repository) 
+        public BatteryController() 
         {
             // if(_context.Batteries.Count() == 0)
             // {
@@ -28,36 +29,28 @@ namespace Forge.Controllers
             //     });
 			// 	_context.SaveChanges();
             // }
-            _repository = repository;
+            _repository = new BatteryRepository();
         }
 
         // GET api/battery
         [HttpGet]
-        public IEnumerable<Battery> Get()
+        public IActionResult Get()
         {
-            return _repository.GetAll();
+            return new OkObjectResult(_repository.GetAll());
         }
 
         // GET api/battery/5
         [HttpGet("{id}", Name = "GetBattery")]
-        public Battery Get(long id)
+        public IActionResult Get(long id)
         {
-            return _repository.Get(id);
+            return new OkObjectResult(_repository.Get(id));
         }
 
         // POST api/battery
         [HttpPost]
         public IActionResult Post([FromBody] Battery battery)
         {
-            _repository.Add(new Battery() {
-                Name = battery.Name,
-                LipoVoltage = battery.LipoVoltage,
-                MAh = battery.MAh,
-                CRating = battery.CRating,
-                PlugType = battery.PlugType,
-                Weight = battery.Weight,
-                Dimension = battery.Dimension
-            });
+            _repository.Add(battery);
             return CreatedAtRoute("GetBattery", new { id = battery.Id}, battery);
         }
 
@@ -66,15 +59,15 @@ namespace Forge.Controllers
         public IActionResult Put(long id, [FromBody] Battery battery)
         {
             _repository.Update(id, battery);
-            return new NoContentResult();
+            return new OkResult();
         }
 
         // DELETE api/battery/5
         [HttpDelete("{id}")]
         public IActionResult DeleteAsync(long id)
         {
-            _repository.Remove(id);
-            return new NoContentResult();
+            _repository.Delete(id);
+            return new OkResult();
         }
     }
 }
