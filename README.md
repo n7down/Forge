@@ -27,7 +27,7 @@ An API for the components that are used to build quadcopters
 - Quadcopter Workbench
 
 ## Todo
-- [ ] Connect with [mongo database](http://www.qappdesign.com/using-mongodb-with-net-core-webapi/)
+- [ ] Connect with [mongo database](http://www.qappdesign.com/using-mongodb-with-net-core-webapi/) to Battery
 - [ ] Get this to work with Docker
 - [ ] Checkout [slate](https://github.com/lord/slate) for api documentation
 
