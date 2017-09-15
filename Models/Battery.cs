@@ -1,9 +1,13 @@
+using System;
+using MongoDB.Bson.Serialization.Attributes;
+
 namespace Forge.Models
 {
     public class Battery
     {
+		[BsonId]
         public long Id { get; set; }
-        public string Name { get; set; }
+	    public string Name { get; set; }
 		public string LipoVoltage { get; set; }
 		public string MAh { get; set; }
 		public int CRating { get; set; }

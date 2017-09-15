@@ -15,20 +15,20 @@ namespace Forge.Controllers
         public BatteryController(BatteryContext batteryContext) 
         {
             _context = batteryContext;
-            if(_context.Batteries.Count() == 0)
-            {
-                _context.Batteries.Add(new Battery 
-                {
-                    Name = "Tattu 14.8V 1300mAh LiPo Battery", 
-                    LipoVoltage = "4S",
-                    MAh = "1300",
-                    CRating = 45, 
-                    PlugType = "XT60",
-                    Weight = "154g",
-                    Dimension = "72*37*30"
-                });
-				_context.SaveChanges();
-            }
+            // if(_context.Batteries.Count() == 0)
+            // {
+            //     _context.Batteries.Add(new Battery 
+            //     {
+            //         Name = "Tattu 14.8V 1300mAh LiPo Battery", 
+            //         LipoVoltage = "4S",
+            //         MAh = "1300",
+            //         CRating = 45, 
+            //         PlugType = "XT60",
+            //         Weight = "154g",
+            //         Dimension = "72*37*30"
+            //     });
+			// 	_context.SaveChanges();
+            // }
         }
 
         // GET api/frame
