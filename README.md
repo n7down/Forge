@@ -27,6 +27,9 @@ An API for the components that are used to build quadcopters
 - Quadcopter Workbench
 
 ## Todo
+- [ ] Connect with [mongo database](http://www.qappdesign.com/using-mongodb-with-net-core-webapi/)
 - [ ] Get this to work with Docker
 - [ ] Checkout [slate](https://github.com/lord/slate) for api documentation
-- [ ] Setup hosting through `hosting.json`
+
+## Notes
+- [Hosting in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/hosting?tabs=aspnetcore2x)
