@@ -7,7 +7,7 @@ namespace Forge.Models
     public class BatteryContext : DbContext
     {
         private readonly IMongoDatabase _database = null;
-        public BatteryContext(DbContextOptions<BatteryContext> options, IOptions<Settings> settings) : base(options)
+        public BatteryContext(IOptions<Settings> settings)
         {
             var client = new MongoClient(settings.Value.ConnectionString);
             if (client != null)
@@ -15,10 +15,7 @@ namespace Forge.Models
                 _database = client.GetDatabase(settings.Value.Database);
             }
         }
-
-        public DbSet<Battery> Batteries { get; set; }
-
-        public IMongoCollection<Battery> Batteries2
+        public IMongoCollection<Battery> Batteries
         {
             get 
             {

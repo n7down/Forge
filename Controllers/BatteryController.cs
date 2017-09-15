@@ -10,11 +10,10 @@ namespace Forge.Controllers
     [Route("api/[controller]")]
     public class BatteryController : Controller
     {
-        private readonly BatteryContext _context;
+        private BatteryRepository _repository;
 
-        public BatteryController(BatteryContext batteryContext) 
+        public BatteryController(BatteryRepository repository) 
         {
-            _context = batteryContext;
             // if(_context.Batteries.Count() == 0)
             // {
             //     _context.Batteries.Add(new Battery 
@@ -29,81 +28,52 @@ namespace Forge.Controllers
             //     });
 			// 	_context.SaveChanges();
             // }
+            _repository = repository;
         }
 
-        // GET api/frame
+        // GET api/battery
         [HttpGet]
         public IEnumerable<Battery> Get()
         {
-            return _context.Batteries.ToList();
+            return _repository.GetAll();
         }
 
-        // GET api/frame/5
+        // GET api/battery/5
         [HttpGet("{id}", Name = "GetBattery")]
-        public IActionResult Get(long id)
+        public Battery Get(long id)
         {
-            var frame = _context.Batteries.FirstOrDefault(t => t.Id == id);
-            if(frame == null)
-            {
-                return new JsonResult("{}");
-            }
-            return new ObjectResult(frame);
+            return _repository.Get(id);
         }
 
-        // POST api/frame
+        // POST api/battery
         [HttpPost]
         public IActionResult Post([FromBody] Battery battery)
         {
-            if(battery == null)
-            {
-                return BadRequest();
-            }
-            _context.Batteries.Add(battery);
-            _context.SaveChanges();
+            _repository.Add(new Battery() {
+                Name = battery.Name,
+                LipoVoltage = battery.LipoVoltage,
+                MAh = battery.MAh,
+                CRating = battery.CRating,
+                PlugType = battery.PlugType,
+                Weight = battery.Weight,
+                Dimension = battery.Dimension
+            });
             return CreatedAtRoute("GetBattery", new { id = battery.Id}, battery);
         }
 
-        // PUT api/frame/5
+        // PUT api/battery/5
         [HttpPut("{id}")]
         public IActionResult Put(long id, [FromBody] Battery battery)
         {
-            if(battery == null || battery.Id != id)
-            {
-                return BadRequest();
-            }
-            
-            var b = _context.Batteries.FirstOrDefault(t => t.Id == id);
-            if (b == null)
-            {
-                return NotFound();
-            }
-
-            b.Id = battery.Id;
-            b.Name = battery.Name;
-			b.LipoVoltage = battery.LipoVoltage;
-			b.MAh = battery.MAh;
-			b.CRating = battery.CRating;
-			b.PlugType = battery.PlugType;
-			b.Weight = battery.Weight;
-			b.Dimension = battery.Dimension;
-
-            _context.Batteries.Update(b);
-            _context.SaveChanges();
+            _repository.Update(id, battery);
             return new NoContentResult();
         }
 
-        // DELETE api/frame/5
+        // DELETE api/battery/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public IActionResult DeleteAsync(long id)
         {
-            var battery = _context.Batteries.FirstOrDefault(t => t.Id == id);
-            if (battery == null)
-            {
-                return NotFound();
-            }
-
-            _context.Batteries.Remove(battery);
-            _context.SaveChanges();
+            _repository.Remove(id);
             return new NoContentResult();
         }
     }
