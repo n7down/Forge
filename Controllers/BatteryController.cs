@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Forge.Models;
 using MongoDB.Driver;
 
@@ -13,23 +14,9 @@ namespace Forge.Controllers
     {
         private readonly BatteryRepository _repository;
 
-        public BatteryController() 
+        public BatteryController(IOptions<Settings> settings) 
         {
-            // if(_context.Batteries.Count() == 0)
-            // {
-            //     _context.Batteries.Add(new Battery 
-            //     {
-            //         Name = "Tattu 14.8V 1300mAh LiPo Battery", 
-            //         LipoVoltage = "4S",
-            //         MAh = "1300",
-            //         CRating = 45, 
-            //         PlugType = "XT60",
-            //         Weight = "154g",
-            //         Dimension = "72*37*30"
-            //     });
-			// 	_context.SaveChanges();
-            // }
-            _repository = new BatteryRepository();
+            _repository = new BatteryRepository(settings);
         }
 
         // GET api/battery

@@ -10,54 +10,56 @@ namespace Forge.Models
     {
         private readonly IMongoDatabase _database;
 
-        private IMongoCollection<Battery> GetBatteries()
+        private IMongoCollection<Battery> Batteries
         {
-            return _database.GetCollection<Battery>("batteries");
+            get
+            {
+                return _database.GetCollection<Battery>("batteries");
+            }
         }
 
-        public BatteryRepository()
+        public BatteryRepository(IOptions<Settings> settings)
         {
-            var mongoClient = new MongoClient("mongodb://localhost:27017");
-            _database = mongoClient.GetDatabase("qcwdb");
-
+            var mongoClient = new MongoClient(settings.Value.ConnectionString);
+            _database = mongoClient.GetDatabase(settings.Value.Database);
         }
 
-        public Battery Add(Battery battery)
+        public Battery Add(Battery item)
         {
-            GetBatteries().InsertOne(battery);
-            return battery;
+            Batteries.InsertOne(item);
+            return item;
         }
 
         public IEnumerable<Battery> GetAll()
         {
-            return GetBatteries().Find(FilterDefinition<Battery>.Empty).ToList();
+            return Batteries.Find(FilterDefinition<Battery>.Empty).ToList();
         }
 
         public Battery Get(long id)
         {
             var filter = Builders<Battery>.Filter.Eq(a => a.Id, id);
-            return GetBatteries().Find(filter).FirstOrDefault();
+            return Batteries.Find(filter).FirstOrDefault();
         }
 
-        public void Update(long id, Battery battery)
+        public void Update(long id, Battery item)
         {
             var filter = Builders<Battery>.Filter.Eq(a => a.Id, id);
             var update = Builders<Battery>.Update
-                .Set(x => x.Name, battery.Name)
-                .Set(x => x.LipoVoltage, battery.LipoVoltage)
-                .Set(x => x.MAh, battery.MAh)
-                .Set(x => x.CRating, battery.CRating)
-                .Set(x => x.PlugType, battery.PlugType)
-                .Set(x => x.Weight, battery.Weight)
-                .Set(x => x.Dimension, battery.Dimension);
+                .Set(x => x.Name, item.Name)
+                .Set(x => x.LipoVoltage, item.LipoVoltage)
+                .Set(x => x.MAh, item.MAh)
+                .Set(x => x.CRating, item.CRating)
+                .Set(x => x.PlugType, item.PlugType)
+                .Set(x => x.Weight, item.Weight)
+                .Set(x => x.Dimension, item.Dimension);
 
-            var updateResult = GetBatteries().UpdateOne(filter, update);
+            var updateResult = Batteries.UpdateOne(filter, update);
         }
 
         public void Delete(long id)
         {
             var filter = Builders<Battery>.Filter.Eq(a => a.Id, id);
-            GetBatteries().DeleteOne(filter);
+            Batteries.DeleteOne(filter);
         }
     }
 }

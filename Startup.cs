@@ -27,11 +27,11 @@ namespace Forge
             services.AddDbContext<FlightControllerContext>(opt => opt.UseInMemoryDatabase("FlightControllerList"));
             services.AddMvc();
 
-            // services.Configure<Settings>(options =>
-            // {
-            //     options.ConnectionString = Configuration.GetSection("MongoConnection:ConnectionString").Value;
-            //     options.Database = Configuration.GetSection("MongoConnection:Database").Value;
-            // });
+            services.Configure<Settings>(options =>
+            {
+                options.ConnectionString = Configuration.GetSection("MongoConnection:ConnectionString").Value;
+                options.Database = Configuration.GetSection("MongoConnection:Database").Value;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
