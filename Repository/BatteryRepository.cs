@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
+using Forge.Models;
 using MongoDB.Driver;
 
-namespace Forge.Models
+namespace Forge.Repository
 {
     public class BatteryRepository
     {

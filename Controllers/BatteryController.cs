@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Forge.Models;
+using Forge.Repository;
 using MongoDB.Driver;
 
 namespace Forge.Controllers
