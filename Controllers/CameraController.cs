@@ -21,8 +21,8 @@ namespace Forge.Controllers
                 {
                     Name = "Runcam Swift 2",
                     IRBlock = true,
-                    Mic = true, 
-                    WeightInGrams = 12
+                    Mic = true,
+                    Weight = 12
                 });
                 _context.SaveChanges();
             }
