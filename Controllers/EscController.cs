@@ -4,101 +4,58 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Forge.Models;
+using Forge.Repository;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 namespace Forge.Controllers
 {
     [Route("api/[controller]")]
     public class EscController : Controller
     {
-        private readonly EscContext _context;
+        private readonly EscRepository _repository;
 
-        public EscController(EscContext escContext) 
+        public EscController(IOptions<Settings> settings) 
         {
-            _context = escContext;
-            if(_context.Escs.Count() == 0)
-            {
-                _context.Escs.Add(new Esc 
-                {
-                    
-                });
-                _context.SaveChanges();
-            }
+            _repository = new EscRepository(settings);
         }
 
         // GET api/esc
         [HttpGet]
-        public IEnumerable<Esc> Get()
+        public IActionResult Get()
         {
-            return _context.Escs.ToList();
+            return new OkObjectResult(_repository.GetAll());
         }
 
         // GET api/esc/5
         [HttpGet("{id}", Name = "GetEsc")]
         public IActionResult Get(long id)
         {
-            var esc = _context.Escs.FirstOrDefault(t => t.Id == id);
-            if(esc == null)
-            {
-                return new JsonResult("{}");
-            }
-            return new ObjectResult(esc);
+            return new OkObjectResult(_repository.Get(id));
         }
 
         // POST api/esc
         [HttpPost]
         public IActionResult Post([FromBody] Esc esc)
         {
-            if(esc == null)
-            {
-                return BadRequest();
-            }
-            _context.Escs.Add(esc);
-            _context.SaveChanges();
-            return CreatedAtRoute("GetEsc", new { id = esc.Id}, esc);
+            _repository.Add(esc);
+            return CreatedAtRoute("GetBattery", new { id = esc.Id}, esc);
         }
 
         // PUT api/esc/5
         [HttpPut("{id}")]
         public IActionResult Put(long id, [FromBody] Esc esc)
         {
-            if(esc == null || esc.Id != id)
-            {
-                return BadRequest();
-            }
-            
-            var e = _context.Escs.FirstOrDefault(t => t.Id == id);
-            if (e == null)
-            {
-                return NotFound();
-            }
-
-            e.Name = esc.Name;
-            e.Weight = esc.Weight;
-            e.MaxCurrent = esc.MaxCurrent;
-            e.AllInOne = esc.AllInOne;
-            e.EscProtocol = esc.EscProtocol;
-            e.LipoVoltage = esc.LipoVoltage;
-            e.EscFirmware = esc.EscFirmware;
-            e.Chip = esc.Chip;
-
-            _context.Escs.Update(e);
-            _context.SaveChanges();
-            return new NoContentResult();
+            _repository.Update(id, esc);
+            return new OkResult();
         }
 
         // DELETE api/esc/5
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            var esc = _context.Escs.FirstOrDefault(t => t.Id == id);
-            if (esc == null)
-            {
-                return NotFound();
-            }
-
-            _context.Escs.Remove(esc);
-            _context.SaveChanges();
-            return new NoContentResult();
+            _repository.Delete(id);
+            return new OkResult();
         }
     }
 }

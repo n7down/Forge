@@ -4,56 +4,40 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Forge.Models;
+using Forge.Repository;
+using Microsoft.Extensions.Options;
 
 namespace Forge.Controllers
 {
     [Route("api/[controller]")]
     public class ReceiverController : Controller
     {
-        private readonly ReceiverContext _context;
+        private readonly ReceiverRepository _repository;
 
-        public ReceiverController(ReceiverContext receiverContext) 
+        public ReceiverController(IOptions<Settings> settings) 
         {
-            _context = receiverContext;
-            if(_context.Receivers.Count() == 0)
-            {
-                _context.Receivers.Add(new Receiver 
-                {
-
-                });
-                _context.SaveChanges();
-            }
+            _repository = new ReceiverRepository(settings);
         }
 
         // GET api/frame
         [HttpGet]
-        public IEnumerable<Receiver> Get()
+        public IActionResult Get()
         {
-            return _context.Receivers.ToList();
+            return new OkObjectResult(_repository.GetAll());
         }
 
         // GET api/frame/5
         [HttpGet("{id}", Name = "GetReceiver")]
         public IActionResult Get(long id)
         {
-            var propeller = _context.Receivers.FirstOrDefault(t => t.Id == id);
-            if(propeller == null)
-            {
-                return new JsonResult("{}");
-            }
-            return new ObjectResult(propeller);
+            return new OkObjectResult(_repository.GetAll());
         }
 
         // POST api/frame
         [HttpPost]
         public IActionResult Post([FromBody] Receiver receiver)
         {
-            if(receiver == null)
-            {
-                return BadRequest();
-            }
-            _context.Receivers.Add(receiver);
-            _context.SaveChanges();
+            _repository.Add(receiver);
             return CreatedAtRoute("GetBattery", new { id = receiver.Id}, receiver);
         }
 
@@ -61,41 +45,16 @@ namespace Forge.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(long id, [FromBody] Receiver receiver)
         {
-            if(receiver == null || receiver.Id != id)
-            {
-                return BadRequest();
-            }
-            
-            var r = _context.Receivers.FirstOrDefault(t => t.Id == id);
-            if (r == null)
-            {
-                return NotFound();
-            }
-
-            r.Id = receiver.Id;
-            r.Name = receiver.Name;
-            r.Weight = receiver.Weight;
-            r.Channels = receiver.Channels;
-            r.Telemetry = receiver.Telemetry;
-
-            _context.Receivers.Update(r);
-            _context.SaveChanges();
-            return new NoContentResult();
+            _repository.Update(id, receiver);
+            return new OkResult();
         }
 
         // DELETE api/frame/5
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            var receiver = _context.Receivers.FirstOrDefault(t => t.Id == id);
-            if (receiver == null)
-            {
-                return NotFound();
-            }
-
-            _context.Receivers.Remove(receiver);
-            _context.SaveChanges();
-            return new NoContentResult();
+            _repository.Delete(id);
+            return new OkResult();
         }
     }
 }

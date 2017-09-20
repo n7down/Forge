@@ -4,59 +4,41 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Forge.Models;
+using Forge.Repository;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 namespace Forge.Controllers
 {
     [Route("api/[controller]")]
     public class CameraController : Controller
     {
-        private readonly CameraContext _context;
+        private readonly CameraRepository _repository;
 
-        public CameraController(CameraContext cameraContext) 
+        public CameraController(IOptions<Settings> settings) 
         {
-            _context = cameraContext;
-            if(_context.Cameras.Count() == 0)
-            {
-                _context.Cameras.Add(new Camera 
-                {
-                    Name = "Runcam Swift 2",
-                    IRBlock = true,
-                    Mic = true,
-                    Weight = 12
-                });
-                _context.SaveChanges();
-            }
+            _repository = new CameraRepository(settings);
         }
 
         // GET api/frame
         [HttpGet]
-        public IEnumerable<Camera> Get()
+        public IActionResult Get()
         {
-            return _context.Cameras.ToList();
+            return new OkObjectResult(_repository.GetAll());
         }
 
         // GET api/frame/5
         [HttpGet("{id}", Name = "GetCamera")]
         public IActionResult Get(long id)
         {
-            var camera = _context.Cameras.FirstOrDefault(t => t.Id == id);
-            if(camera == null)
-            {
-                return new JsonResult("{}");
-            }
-            return new ObjectResult(camera);
+            return new OkObjectResult(_repository.Get(id));
         }
 
         // POST api/frame
         [HttpPost]
         public IActionResult Post([FromBody] Camera camera)
         {
-            if(camera == null)
-            {
-                return BadRequest();
-            }
-            _context.Cameras.Add(camera);
-            _context.SaveChanges();
+            _repository.Add(camera);
             return CreatedAtRoute("GetBattery", new { id = camera.Id}, camera);
         }
 
@@ -64,38 +46,16 @@ namespace Forge.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(long id, [FromBody] Camera camera)
         {
-            if(camera == null || camera.Id != id)
-            {
-                return BadRequest();
-            }
-            
-            var c = _context.Cameras.FirstOrDefault(t => t.Id == id);
-            if (c == null)
-            {
-                return NotFound();
-            }
-
-            c.Id = camera.Id;
-            c.Name = camera.Name;
-
-            _context.Cameras.Update(c);
-            _context.SaveChanges();
-            return new NoContentResult();
+            _repository.Update(id, camera);
+            return new OkResult();
         }
 
         // DELETE api/frame/5
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            var camera = _context.Cameras.FirstOrDefault(t => t.Id == id);
-            if (camera == null)
-            {
-                return NotFound();
-            }
-
-            _context.Cameras.Remove(camera);
-            _context.SaveChanges();
-            return new NoContentResult();
+            _repository.Delete(id);
+            return new OkResult();
         }
     }
 }

@@ -4,56 +4,40 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Forge.Models;
+using Forge.Repository;
+using Microsoft.Extensions.Options;
 
 namespace Forge.Controllers
 {
     [Route("api/[controller]")]
     public class PropellerController : Controller
     {
-        private readonly PropellerContext _context;
+        private readonly PropellerRepository _repository;
 
-        public PropellerController(PropellerContext propellerContext) 
+        public PropellerController(IOptions<Settings> settings) 
         {
-            _context = propellerContext;
-            if(_context.Propellers.Count() == 0)
-            {
-                _context.Propellers.Add(new Propeller 
-                {
-
-                });
-                _context.SaveChanges();
-            }
+            _repository = new PropellerRepository(settings);
         }
 
         // GET api/frame
         [HttpGet]
-        public IEnumerable<Propeller> Get()
+        public IActionResult Get()
         {
-            return _context.Propellers.ToList();
+            return new OkObjectResult(_repository.GetAll());
         }
 
         // GET api/frame/5
         [HttpGet("{id}", Name = "GetPropeller")]
         public IActionResult Get(long id)
         {
-            var propeller = _context.Propellers.FirstOrDefault(t => t.Id == id);
-            if(propeller == null)
-            {
-                return new JsonResult("{}");
-            }
-            return new ObjectResult(propeller);
+            return new OkObjectResult(_repository.Get(id));
         }
 
         // POST api/frame
         [HttpPost]
         public IActionResult Post([FromBody] Propeller propeller)
         {
-            if(propeller == null)
-            {
-                return BadRequest();
-            }
-            _context.Propellers.Add(propeller);
-            _context.SaveChanges();
+            _repository.Add(propeller);
             return CreatedAtRoute("GetBattery", new { id = propeller.Id}, propeller);
         }
 
@@ -61,43 +45,16 @@ namespace Forge.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(long id, [FromBody] Propeller propeller)
         {
-            if(propeller == null || propeller.Id != id)
-            {
-                return BadRequest();
-            }
-            
-            var p = _context.Propellers.FirstOrDefault(t => t.Id == id);
-            if (p == null)
-            {
-                return NotFound();
-            }
-
-            p.Id = propeller.Id;
-            p.Name = propeller.Name;
-            p.Diameter = propeller.Diameter;
-            p.Pitch = propeller.Pitch;
-            p.Blades = propeller.Blades;
-            p.Material = propeller.Material;
-            p.Shaft = propeller.Shaft;
-
-            _context.Propellers.Update(p);
-            _context.SaveChanges();
-            return new NoContentResult();
+            _repository.Update(id, propeller);
+            return new OkResult();
         }
 
         // DELETE api/frame/5
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            var propeller = _context.Propellers.FirstOrDefault(t => t.Id == id);
-            if (propeller == null)
-            {
-                return NotFound();
-            }
-
-            _context.Propellers.Remove(propeller);
-            _context.SaveChanges();
-            return new NoContentResult();
+            _repository.Delete(id);
+            return new OkResult();
         }
     }
 }

@@ -4,95 +4,57 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Forge.Models;
+using Forge.Repository;
+using Microsoft.Extensions.Options;
 
 namespace Forge.Controllers
 {
     [Route("api/[controller]")]
     public class FrameController : Controller
     {
-        private readonly FrameContext _context;
+        private readonly FrameRepository _repository;
 
-        public FrameController(FrameContext flightControllerContext) 
+        public FrameController(IOptions<Settings> settings) 
         {
-            _context = flightControllerContext;
-            if(_context.Frames.Count() == 0)
-            {
-                _context.Frames.Add(new Frame 
-                {
-
-                });
-                _context.SaveChanges();
-            }
+            _repository = new FrameRepository(settings);
         }
 
         // GET api/frame
         [HttpGet]
-        public IEnumerable<Frame> Get()
+        public IActionResult Get()
         {
-            return _context.Frames.ToList();
+            return new OkObjectResult(_repository.GetAll());
         }
 
         // GET api/frame/5
         [HttpGet("{id}", Name = "GetFrame")]
         public IActionResult Get(long id)
         {
-            var frame = _context.Frames.FirstOrDefault(t => t.Id == id);
-            if(frame == null)
-            {
-                return new JsonResult("{}");
-            }
-            return new ObjectResult(frame);
+            return new OkObjectResult(_repository.Get(id));
         }
 
         // POST api/frame
         [HttpPost]
         public IActionResult Post([FromBody] Frame frame)
         {
-            if(frame == null)
-            {
-                return BadRequest();
-            }
-            _context.Frames.Add(frame);
-            _context.SaveChanges();
-            return CreatedAtRoute("GetFrame", new { id = frame.Id}, frame);
+            _repository.Add(frame);
+            return CreatedAtRoute("GetBattery", new { id = frame.Id}, frame);
         }
 
         // PUT api/frame/5
         [HttpPut("{id}")]
         public IActionResult Put(long id, [FromBody] Frame frame)
         {
-            if(frame == null || frame.Id != id)
-            {
-                return BadRequest();
-            }
-            
-            var f = _context.Frames.FirstOrDefault(t => t.Id == id);
-            if (f == null)
-            {
-                return NotFound();
-            }
-
-            f.Name = frame.Name;
-            f.Weight = frame.Weight;
-
-            _context.Frames.Update(f);
-            _context.SaveChanges();
-            return new NoContentResult();
+            _repository.Update(id, frame);
+            return new OkResult();
         }
 
         // DELETE api/frame/5
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            var frame = _context.Frames.FirstOrDefault(t => t.Id == id);
-            if (frame == null)
-            {
-                return NotFound();
-            }
-
-            _context.Frames.Remove(frame);
-            _context.SaveChanges();
-            return new NoContentResult();
+            _repository.Delete(id);
+            return new OkResult();
         }
     }
 }

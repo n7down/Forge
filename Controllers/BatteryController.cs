@@ -52,7 +52,7 @@ namespace Forge.Controllers
 
         // DELETE api/battery/5
         [HttpDelete("{id}")]
-        public IActionResult DeleteAsync(long id)
+        public IActionResult Delete(long id)
         {
             _repository.Delete(id);
             return new OkResult();
