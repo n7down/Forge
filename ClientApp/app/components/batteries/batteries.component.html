@@ -1,1 +1,27 @@
 <h1>Batteries</h1>
+
+<a [routerLink]="['/batteries']">
+    <span class='glyphicon glyphicon-plus'></span> Create Battery
+</a>
+
+<p *ngIf="!batteries"><em>Loading...</em></p>
+
+<table class='table' *ngIf="batteries">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class='item' *ngFor="let battery of batteries">
+            <td>{{ battery.id }}</td>
+            <td>{{ battery.name }}</td>
+            <td>
+                <a class='clickable'><span class='glyphicon glyphicon-edit'></span> Edit </a> | 
+                <a class='clickable'><span class='glyphicon glyphicon-list'></span> Details </a> | 
+                <a class='clickable'><span class='glyphicon glyphicon-trash'></span> Trash </a>
+            </td>
+        </tr>
+    </tbody>
+</table>

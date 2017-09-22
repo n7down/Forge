@@ -21,8 +21,8 @@ export class DashboardComponent {
 
     public request() {
         this.http.get(this.baseUrl + 'api/' + this.input).subscribe(result => {
-            var flightControllers = result.json() as FlightController[];
-            this.data = JSON.stringify(flightControllers, null, 2);
+            var d = result.json();
+            this.data = JSON.stringify(d, null, 2);
         }, error => console.error(error));
     }
 }
