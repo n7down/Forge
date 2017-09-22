@@ -52,7 +52,8 @@ namespace Forge.Repository
                 .Set(x => x.CRating, item.CRating)
                 .Set(x => x.PlugType, item.PlugType)
                 .Set(x => x.Weight, item.Weight)
-                .Set(x => x.Dimension, item.Dimension);
+                .Set(x => x.Dimension, item.Dimension)
+                .Set(x => x.Link, item.Link);
 
             var updateResult = Batteries.UpdateOne(filter, update);
         }

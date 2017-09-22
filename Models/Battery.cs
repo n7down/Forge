@@ -21,5 +21,7 @@ namespace Forge.Models
 		public string Weight { get; set; }
 		[BsonElement("Dimension")]
 		public string Dimension { get; set; }
+		[BsonElement("Link")]
+		public string Link { get; set; }
 	}
 }

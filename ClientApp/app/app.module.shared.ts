@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { BatteriesComponent } from './components/batteries/batteries.component';
 import { FlightControllersComponent } from './components/flight-controllers/flight-controllers.component';
 import { DocumentationComponent } from './components/documentation/documentation.component';
 import { AboutComponent } from './components/about/about.component';
@@ -16,6 +17,7 @@ import { AboutComponent } from './components/about/about.component';
         AppComponent,
         NavMenuComponent,
         DashboardComponent,
+        BatteriesComponent,
         FlightControllersComponent,
         DocumentationComponent,
         AboutComponent
@@ -27,6 +29,7 @@ import { AboutComponent } from './components/about/about.component';
         RouterModule.forRoot([
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent },
+            { path: 'batteries', component: BatteriesComponent },
             { path: 'flight-controllers', component: FlightControllersComponent },
             { path: 'documentation', component: DocumentationComponent },
             { path: 'about', component: AboutComponent },
