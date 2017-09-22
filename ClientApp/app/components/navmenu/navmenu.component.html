@@ -18,6 +18,20 @@
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/flight-controllers']">
+                        <span class='glyphicon glyphicon-edit'></span> Flight Controllers
+                    </a>
+                </li>
+                <!-- collapsable nav -->
+                <!-- <li>
+                    <a href="#" data-target="#item2" data-toggle="collapse" data-parent="#stacked-menu">Process Two<span class="caret arrow"></span></a>          
+                    <ul class="nav nav-pills nav-stacked collapse" id="item2">
+                        <li><a href="#">View One</a></li>
+                        <li><a href="#">View Two</a></li>
+                        <li><a href="#">View Three</a></li>
+                    </ul>
+                </li> -->
+                <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/documentation']">
                         <span class='glyphicon glyphicon-education'></span> Documentation
                     </a>

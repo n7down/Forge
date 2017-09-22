@@ -35,6 +35,7 @@ namespace Forge.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] FlightController flightController)
         {
+            // TODO: updated ID with every post
             _repository.Add(flightController);
             return CreatedAtRoute("GetBattery", new { id = flightController.Id}, flightController);
         }
