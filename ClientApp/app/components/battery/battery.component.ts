@@ -9,7 +9,6 @@ import { Http } from '@angular/http';
     styleUrls: ['./battery.component.css']
 })
 export class BatteryComponent implements OnInit, OnDestroy {
-    public id: number;
     private sub: any;
     private baseUrl: string;
     public battery: Battery;
@@ -20,8 +19,8 @@ export class BatteryComponent implements OnInit, OnDestroy {
     
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
-            this.id = +params['id'];
-            this.http.get(this.baseUrl + 'api/battery/' + this.id).subscribe(result => {
+            var id = +params['id'];
+            this.http.get(this.baseUrl + 'api/battery/' + id).subscribe(result => {
                 this.battery = result.json() as Battery
             }, error => console.error(error));
         });
