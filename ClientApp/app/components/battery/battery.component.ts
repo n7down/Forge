@@ -2,7 +2,6 @@ import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Http } from '@angular/http';
 
-
 @Component({
     selector: 'battery',
     templateUrl: './battery.component.html',
@@ -19,10 +18,12 @@ export class BatteryComponent implements OnInit, OnDestroy {
     
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
-            var id = +params['id'];
-            this.http.get(this.baseUrl + 'api/battery/' + id).subscribe(result => {
-                this.battery = result.json() as Battery
-            }, error => console.error(error));
+            // FIXME: this is not working now that i changed the id to ObjectId
+            // let id = +params['id'];
+            // console.log('id: ' + id);
+            // this.http.get(this.baseUrl + 'api/battery/' + id).subscribe(result => {
+            //     this.battery = result.json() as Battery
+            // }, error => console.error(error));
         });
     }
 
@@ -32,7 +33,7 @@ export class BatteryComponent implements OnInit, OnDestroy {
 }
 
 interface Battery {
-    id: number;
+    id: string;
     name: string;
     lipoVoltage: string;
     mah: string;

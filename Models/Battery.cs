@@ -1,4 +1,5 @@
 using System;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Forge.Models
@@ -6,7 +7,7 @@ namespace Forge.Models
     public class Battery
     {
 		[BsonId]
-        public long Id { get; set; }
+        public string Id { get; set; }
 		[BsonElement("Name")]
 	    public string Name { get; set; }
 		[BsonElement("LipoVoltage")]

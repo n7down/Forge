@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 using Forge.Models;
 using Forge.Repository;
 using MongoDB.Driver;
+using MongoDB.Bson;
 
 namespace Forge.Controllers
 {
@@ -29,7 +30,7 @@ namespace Forge.Controllers
 
         // GET api/battery/5
         [HttpGet("{id}", Name = "GetBattery")]
-        public IActionResult Get(long id)
+        public IActionResult Get(string id)
         {
             return new OkObjectResult(_repository.Get(id));
         }
@@ -38,13 +39,14 @@ namespace Forge.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Battery battery)
         {
+            battery.Id = ObjectId.GenerateNewId().ToString();
             _repository.Add(battery);
             return CreatedAtRoute("GetBattery", new { id = battery.Id}, battery);
         }
 
         // PUT api/battery/5
         [HttpPut("{id}")]
-        public IActionResult Put(long id, [FromBody] Battery battery)
+        public IActionResult Put(string id, [FromBody] Battery battery)
         {
             _repository.Update(id, battery);
             return new OkResult();
@@ -52,7 +54,7 @@ namespace Forge.Controllers
 
         // DELETE api/battery/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public IActionResult Delete(string id)
         {
             _repository.Delete(id);
             return new OkResult();

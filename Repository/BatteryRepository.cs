@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Forge.Models;
 using MongoDB.Driver;
+using MongoDB.Bson;
 
 namespace Forge.Repository
 {
@@ -36,13 +37,13 @@ namespace Forge.Repository
             return Batteries.Find(FilterDefinition<Battery>.Empty).ToList();
         }
 
-        public Battery Get(long id)
+        public Battery Get(string id)
         {
             var filter = Builders<Battery>.Filter.Eq(a => a.Id, id);
             return Batteries.Find(filter).FirstOrDefault();
         }
 
-        public void Update(long id, Battery item)
+        public void Update(string id, Battery item)
         {
             var filter = Builders<Battery>.Filter.Eq(a => a.Id, id);
             var update = Builders<Battery>.Update
@@ -58,7 +59,7 @@ namespace Forge.Repository
             var updateResult = Batteries.UpdateOne(filter, update);
         }
 
-        public void Delete(long id)
+        public void Delete(string id)
         {
             var filter = Builders<Battery>.Filter.Eq(a => a.Id, id);
             Batteries.DeleteOne(filter);
