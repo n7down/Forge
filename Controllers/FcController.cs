@@ -37,7 +37,7 @@ namespace Forge.Controllers
         {
             // TODO: updated ID with every post
             _repository.Add(flightController);
-            return CreatedAtRoute("GetBattery", new { id = flightController.Id}, flightController);
+            return CreatedAtRoute("GetFC", new { id = flightController.Id}, flightController);
         }
 
         // PUT api/fc/5
