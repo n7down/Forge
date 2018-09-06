@@ -11,8 +11,9 @@ An API for the components that are used to build quadcopters
 1. Clone this directory with `https://github.com/n7down/Forge.git`
 2. Run `docker run -it --name mongo 27017:27017 -p 28017:28017 -d mongo` to start the mongo database
 3. Run `npm install` from given directory
-4. Run `dotnet run` 
-5. Website will be running on `localhost:5000`
+4. Run `dotnet build`
+5. Run `dotnet run` 
+6. Website will be running on `localhost:5000`
 
 ## Running from Docker
 1. Run `docker run -it --name mongo 27017:27017 -p 28017:28017 -d mongo` to start the mongo database
