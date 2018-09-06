@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Forge.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class FcController : Controller
     {
         private readonly FlightControllerRepository _repository;
@@ -17,21 +17,21 @@ namespace Forge.Controllers
             _repository = new FlightControllerRepository(settings);
         }
 
-        // GET api/fc
+        // GET api/v1/fc
         [HttpGet]
         public IActionResult Get()
         {
             return new OkObjectResult(_repository.GetAll());
         }
 
-        // GET api/fc/5
+        // GET api/fc/v1/5
         [HttpGet("{id}", Name = "GetFC")]
         public IActionResult Get(long id)
         {
             return new OkObjectResult(_repository.Get(id));
         }
 
-        // POST api/fc
+        // POST api/v1/fc
         [HttpPost]
         public IActionResult Post([FromBody] FlightController flightController)
         {
@@ -40,7 +40,7 @@ namespace Forge.Controllers
             return CreatedAtRoute("GetFC", new { id = flightController.Id}, flightController);
         }
 
-        // PUT api/fc/5
+        // PUT api/v1/fc/5
         [HttpPut("{id}")]
         public IActionResult Put(long id, [FromBody] FlightController flightController)
         {
@@ -48,7 +48,7 @@ namespace Forge.Controllers
             return new OkResult();
         }
 
-        // DELETE api/fc/5
+        // DELETE api/v1/fc/5
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {

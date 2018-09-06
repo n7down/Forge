@@ -13,14 +13,14 @@ export class DashboardComponent {
 
     constructor(private http: Http, @Inject('BASE_URL') baseUrl: string) {
         this.baseUrl = baseUrl;
-        this.http.get(this.baseUrl + 'api/' + this.input).subscribe(result => {
+		this.http.get(this.baseUrl + 'api/v1/' + this.input).subscribe(result => {
             var flightControllers = result.json() as FlightController[];
             this.data = JSON.stringify(flightControllers, null, 2);
         }, error => console.error(error));
     }
 
     public request() {
-        this.http.get(this.baseUrl + 'api/' + this.input).subscribe(result => {
+		this.http.get(this.baseUrl + 'api/v1/' + this.input).subscribe(result => {
             var d = result.json();
             this.data = JSON.stringify(d, null, 2);
         }, error => console.error(error));
