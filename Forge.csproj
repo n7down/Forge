@@ -40,6 +40,9 @@
         <RelativePath>%(DistFiles.Identity)</RelativePath>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       </ResolvedFileToPublish>
-    </ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+	  <Watch Include="**\*.js;**/*.cs;*.csproj" Exclude="node_modules\**\*;**\*.js.map;obj\**\*;bin\**\*" />
+  </ItemGroup>
   </Target>
 </Project>

@@ -17,7 +17,7 @@ export class BatteriesComponent {
 }
 
 interface Battery {
-    id: number;
+    id: string;
     name: string;
     lipoVoltage: string;
     mah: string;

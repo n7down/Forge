@@ -18,8 +18,8 @@
             <td>{{ battery.id }}</td>
             <td>{{ battery.name }}</td>
             <td>
-                <a [routerLink]="['/edit/battery']" class='clickable'><span class='glyphicon glyphicon-edit'></span> Edit </a> | 
-                <a class='clickable'><span class='glyphicon glyphicon-list'></span> Details </a> | 
+				<a [routerLink]="['/edit-battery']" class='clickable'><span class='glyphicon glyphicon-edit'></span> Edit </a> | 
+                <a [routerLink]="['/battery', battery.id]" class='clickable'><span class='glyphicon glyphicon-list'></span> Details </a> | 
                 <a class='clickable'><span class='glyphicon glyphicon-trash'></span> Trash </a>
             </td>
         </tr>

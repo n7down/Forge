@@ -17,14 +17,13 @@ export class BatteryComponent implements OnInit, OnDestroy {
     }
     
     ngOnInit() {
-        this.sub = this.route.params.subscribe(params => {
-            // FIXME: this is not working now that i changed the id to ObjectId
-            // let id = +params['id'];
-            // console.log('id: ' + id);
-            // this.http.get(this.baseUrl + 'api/battery/' + id).subscribe(result => {
-            //     this.battery = result.json() as Battery
-            // }, error => console.error(error));
-        });
+		this.sub = this.route.params.subscribe(params => {
+		//	console.log(params['id'])
+			let id = params['id'];
+			this.http.get(this.baseUrl + 'api/v1/battery/' + id).subscribe(result => {
+		     	this.battery = result.json() as Battery
+			}, error => console.error(error));
+		});
     }
 
     ngOnDestroy() {
