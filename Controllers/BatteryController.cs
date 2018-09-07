@@ -11,7 +11,7 @@ using MongoDB.Bson;
 
 namespace Forge.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class BatteryController : Controller
     {
         private readonly BatteryRepository _repository;

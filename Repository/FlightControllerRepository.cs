@@ -36,13 +36,13 @@ namespace Forge.Repository
             return FlightControllers.Find(FilterDefinition<FlightController>.Empty).ToList();
         }
 
-        public FlightController Get(long id)
+        public FlightController Get(string id)
         {
             var filter = Builders<FlightController>.Filter.Eq(a => a.Id, id);
             return FlightControllers.Find(filter).FirstOrDefault();
         }
 
-        public void Update(long id, FlightController item)
+        public void Update(string id, FlightController item)
         {
             var filter = Builders<FlightController>.Filter.Eq(a => a.Id, id);
             var update = Builders<FlightController>.Update
@@ -69,7 +69,7 @@ namespace Forge.Repository
             var updateResult = FlightControllers.UpdateOne(filter, update);
         }
 
-        public void Delete(long id)
+        public void Delete(string id)
         {
             var filter = Builders<FlightController>.Filter.Eq(a => a.Id, id);
             FlightControllers.DeleteOne(filter);

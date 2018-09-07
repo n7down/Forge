@@ -1,9 +1,13 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Forge.Models;
 using Forge.Repository;
-using Microsoft.Extensions.Options;
+using MongoDB.Driver;
+using MongoDB.Bson;
 
 namespace Forge.Controllers
 {
@@ -26,7 +30,7 @@ namespace Forge.Controllers
 
         // GET api/fc/v1/5
         [HttpGet("{id}", Name = "GetFC")]
-        public IActionResult Get(long id)
+        public IActionResult Get(string id)
         {
             return new OkObjectResult(_repository.Get(id));
         }
@@ -35,14 +39,14 @@ namespace Forge.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] FlightController flightController)
         {
-            // TODO: updated ID with every post
+            flightController.Id = ObjectId.GenerateNewId().ToString();
             _repository.Add(flightController);
             return CreatedAtRoute("GetFC", new { id = flightController.Id}, flightController);
         }
 
         // PUT api/v1/fc/5
         [HttpPut("{id}")]
-        public IActionResult Put(long id, [FromBody] FlightController flightController)
+        public IActionResult Put(string id, [FromBody] FlightController flightController)
         {
             _repository.Update(id, flightController);
             return new OkResult();
@@ -50,7 +54,7 @@ namespace Forge.Controllers
 
         // DELETE api/v1/fc/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public IActionResult Delete(string id)
         {
             _repository.Delete(id);
             return new OkResult();

@@ -9,7 +9,7 @@ export class DashboardComponent {
     private baseUrl: string;
 
     public data: string;
-    public input: string = 'fc/0';
+    public input: string = 'fc';
 
     constructor(private http: Http, @Inject('BASE_URL') baseUrl: string) {
         this.baseUrl = baseUrl;
