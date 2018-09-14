@@ -42,7 +42,7 @@
       </ResolvedFileToPublish>
   </ItemGroup>
   <ItemGroup>
-	  <Watch Include="**\*.js;**/*.cs;*.csproj" Exclude="node_modules\**\*;**\*.js.map;obj\**\*;bin\**\*" />
+	  <Watch Include="**\*.ts;**\*html;**\*.css;**\*.js;**\*.cs;*.csproj" Exclude="node_modules\**\*;**\*.js.map;obj\**\*;bin\**\*" />
   </ItemGroup>
   </Target>
 </Project>

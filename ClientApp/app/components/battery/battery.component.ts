@@ -10,7 +10,7 @@ import { Http } from '@angular/http';
 export class BatteryComponent implements OnInit, OnDestroy {
     private sub: any;
     private baseUrl: string;
-    public battery: Battery;
+    public battery: Battery | undefined;
     
     constructor(private route: ActivatedRoute, private http: Http, @Inject('BASE_URL') baseUrl: string) {
         this.baseUrl = baseUrl;

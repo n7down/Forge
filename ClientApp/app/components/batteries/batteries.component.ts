@@ -7,13 +7,16 @@ import { Http } from '@angular/http';
     styleUrls: ['./batteries.component.css']
 })
 export class BatteriesComponent {
-    public batteries: Battery[];
+    public batteries: Battery[] = [];
 
     constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {
 		http.get(baseUrl + 'api/v1/battery').subscribe(result => {
             this.batteries = result.json() as Battery[];
         }, error => console.error(error));
     }
+
+    remove()
+    {}
 }
 
 interface Battery {

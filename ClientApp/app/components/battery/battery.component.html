@@ -1,4 +1,9 @@
 <h1>Battery</h1>
+
+<a [routerLink]="['/batteries']">
+    <span class='glyphicon glyphicon-chevron-left'></span> Back
+</a><br><br>
+
 <div *ngIf="battery">
 	ID: {{ battery.id }} <br>
 	Name: {{ battery.name }} <br>

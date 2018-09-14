@@ -1,1 +1,27 @@
 <h1>Flight Controllers</h1>
+
+<a [routerLink]="['/create/battery']">
+    <span class='glyphicon glyphicon-plus'></span> Create Flight Controller
+</a>
+
+<p *ngIf="!flightControllers"><em>Loading...</em></p>
+
+<table class='table' *ngIf="flightControllers">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class='item' *ngFor="let flightController of flightControllers">
+            <td>{{ flightController.id }}</td>
+            <td>{{ flightController.name }}</td>
+            <td>
+				<a [routerLink]="['/edit-flightcontroller']" class='clickable'><span class='glyphicon glyphicon-edit'></span> Edit </a> | 
+                <a [routerLink]="['/flightcontroller', flightController.id]" class='clickable'><span class='glyphicon glyphicon-list'></span> Details </a> | 
+                <a class='clickable'><span class='glyphicon glyphicon-trash'></span> Trash </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
