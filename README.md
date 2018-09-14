@@ -12,8 +12,7 @@ An API for the components that are used to build quadcopters
 2. Run `docker run -it --name mongo 27017:27017 -p 28017:28017 -d mongo` to start the mongo database
 3. Run `npm install` from given directory
 4. Run `dotnet build`
-5. Run `dotnet run` 
-- To run on a development environment run `ASPNETCORE_ENVIRONMENT=Development dotnet watch run`
+5. Run `dotnet run` to run in production and `ASPNETCORE_ENVIRONMENT=Development dotnet watch run` to run in development
 6. Website will be running on `localhost:5000`
 
 ## Running from Docker
