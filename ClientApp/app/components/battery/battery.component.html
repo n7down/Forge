@@ -2,16 +2,53 @@
 
 <a [routerLink]="['/batteries']">
     <span class='glyphicon glyphicon-chevron-left'></span> Back
-</a><br><br>
+</a> |
+<a [routerLink]="['/battery/edit', battery.id]">
+    <span class='glyphicon glyphicon-edit'></span> Edit
+</a> |
+<a [routerLink]="['/batteries']">
+    <span class='glyphicon glyphicon-trash'></span> Remove
+</a>
+<br>
+<br>
 
 <div *ngIf="battery">
-	ID: {{ battery.id }} <br>
-	Name: {{ battery.name }} <br>
-	Lipo Voltage: {{ battery.lipoVoltage }} <br>
-	MAh: {{ battery.mah }} <br>
-	CRating: {{ battery.cRating }} <br>
-	PlugType: {{ battery.plugType }} <br>
-	Weight: {{ battery.weight }} <br>
-	Dimension: {{ battery.dimension }} <br>
-	Link: {{ battery.link }}
+	<form>
+		<div class="form-group">
+			<label>ID</label>
+			<input type="id" class="form-control" id="id" value="{{ battery.id }}" disabled>
+		</div>
+		<div class="form-group">
+			<label>Name</label>
+			<input type="name" class="form-control" id="name" value="{{ battery.name }}" disabled>
+		</div>
+		<div class="form-group">
+			<label>Lipo Voltage</label>
+			<input type="lipovoltage" class="form-control" id="lipovoltage" value="{{ battery.lipoVoltage }}" disabled>
+		</div>
+		<div class="form-group">
+			<label>Mah</label>
+			<input type="mah" class="form-control" id="mah" value="{{ battery.mah }}" disabled>
+		</div>
+		<div class="form-group">
+			<label>CRating</label>
+			<input type="crating" class="form-control" id="crating" value="{{ battery.cRating }}" disabled>
+		</div>
+		<div class="form-group">
+			<label>PlugType</label>
+			<input type="plugType" class="form-control" id="plugType" value="{{ battery.plugType }}" disabled>
+		</div>
+		<div class="form-group">
+			<label>Weight</label>
+			<input type="weight" class="form-control" id="weight" value="{{ battery.weight }}" disabled>
+		</div>
+		<div class="form-group">
+			<label>Dimension</label>
+			<input type="dimension" class="form-control" id="dimension" value="{{ battery.dimension }}" disabled>
+		</div>
+		<div class="form-group">
+			<label>Link</label>
+			<input type="link" class="form-control" id="link" value="{{ battery.link }}" disabled>
+		</div>
+	</form>
 </div>

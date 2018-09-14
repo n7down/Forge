@@ -19,21 +19,21 @@ interface FlightController {
     id: string;
     name: string;
     mcu: string;
-    gyroname: string;
+    gyroName: string;
     osd: boolean;
-    osdname: string;
+    osdName: string;
     pdb: boolean;
-    lipovoltage: string;
-    sdcard: boolean;
+    lipoVoltage: string;
+    sdCard: boolean;
     weight: string;
-    numberuarts: number;
+    numberUarts: number;
     barometer: boolean;
     pwm: boolean;
     sbus: boolean;
-    dsmtwo: boolean;
-    ledstrip: boolean
-    videoin: boolean;
-    videoout: boolean;
+    dsmTwo: boolean;
+    ledStrip: boolean
+    videoIn: boolean;
+    videoOut: boolean;
     buzzer: boolean;
-    numbersoftserial: number;
+    numberSoftSerial: number;
 }

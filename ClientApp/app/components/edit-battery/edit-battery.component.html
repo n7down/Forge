@@ -1,1 +1,48 @@
 <h1>Edit Battery</h1>
+
+<a [routerLink]="['/battery', battery.id]">
+    <span class='glyphicon glyphicon-chevron-left'></span> Back
+</a>
+<br>
+<br>
+
+<div *ngIf="battery">
+    <form>
+        <div class="form-group">
+            <label>ID</label>
+            <input type="id" class="form-control" id="id" value="{{ battery.id }}" disabled>
+        </div>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="name" class="form-control" id="name" value="{{ battery.name }}">
+        </div>
+        <div class="form-group">
+            <label>Lipo Voltage</label>
+            <input type="lipovoltage" class="form-control" id="lipovoltage" value="{{ battery.lipoVoltage }}">
+        </div>
+        <div class="form-group">
+            <label>Mah</label>
+            <input type="mah" class="form-control" id="mah" value="{{ battery.mah }}">
+        </div>
+        <div class="form-group">
+            <label>CRating</label>
+            <input type="crating" class="form-control" id="crating" value="{{ battery.cRating }}">
+        </div>
+        <div class="form-group">
+            <label>PlugType</label>
+            <input type="plugType" class="form-control" id="plugType" value="{{ battery.plugType }}">
+        </div>
+        <div class="form-group">
+            <label>Weight</label>
+            <input type="weight" class="form-control" id="weight" value="{{ battery.weight }}">
+        </div>
+        <div class="form-group">
+            <label>Dimension</label>
+            <input type="dimension" class="form-control" id="dimension" value="{{ battery.dimension }}">
+        </div>
+        <div class="form-group">
+            <label>Link</label>
+            <input type="link" class="form-control" id="link" value="{{ battery.link }}">
+        </div>
+    </form>
+</div>

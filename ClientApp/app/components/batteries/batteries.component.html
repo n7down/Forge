@@ -3,6 +3,8 @@
 <a [routerLink]="['/create/battery']">
     <span class='glyphicon glyphicon-plus'></span> Create Battery
 </a>
+<br>
+<br>
 
 <p *ngIf="!batteries"><em>Loading...</em></p>
 
@@ -15,13 +17,8 @@
     </thead>
     <tbody>
         <tr class='item' *ngFor="let battery of batteries">
-            <td>{{ battery.id }}</td>
+            <td><a [routerLink]="['/battery', battery.id]">{{ battery.id }}</a></td>
             <td>{{ battery.name }}</td>
-            <td>
-				<a [routerLink]="['/edit-battery']" class='clickable'><span class='glyphicon glyphicon-edit'></span> Edit </a> | 
-                <a [routerLink]="['/battery', battery.id]" class='clickable'><span class='glyphicon glyphicon-list'></span> Details </a> | 
-                <a class='clickable'><span class='glyphicon glyphicon-trash'></span> Trash </a>
-            </td>
         </tr>
     </tbody>
 </table>

@@ -45,8 +45,8 @@ import { FlightControllersComponent } from './components/flight-controllers/flig
             { path: 'about', component: AboutComponent },
 
             { path: 'battery/:id', component: BatteryComponent },
-            { path: 'create/battery', component: CreateBatteryComponent },
-            { path: 'edit/battery', component: EditBatteryComponent },
+            { path: 'battery/create', component: CreateBatteryComponent },
+            { path: 'battery/edit/:id', component: EditBatteryComponent },
             { path: 'batteries', component: BatteriesComponent },
 
             { path: 'flight-controllers', component: FlightControllersComponent },
