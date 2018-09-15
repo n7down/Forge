@@ -2,13 +2,15 @@
 
 <a [routerLink]="['/batteries']">
     <span class='glyphicon glyphicon-chevron-left'></span> Back
-</a> |
-<a [routerLink]="['/battery/edit', battery.id]">
-    <span class='glyphicon glyphicon-edit'></span> Edit
-</a> |
-<a [routerLink]="['/batteries']">
-    <span class='glyphicon glyphicon-trash'></span> Remove
 </a>
+<span style="float:right;">
+	<a [routerLink]="['/battery/edit', battery.id]">
+		<span class='glyphicon glyphicon-edit'></span> Edit
+	</a> |
+	<a [routerLink]="['/batteries']">
+		<span class='glyphicon glyphicon-trash'></span> Remove
+	</a>
+</span>
 <br>
 <br>
 
