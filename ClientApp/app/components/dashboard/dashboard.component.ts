@@ -8,7 +8,7 @@ import { Http } from '@angular/http';
 export class DashboardComponent {
     private baseUrl: string;
 
-    public data: string;
+    public data: string | undefined;
     public input: string = 'fc';
 
     constructor(private http: Http, @Inject('BASE_URL') baseUrl: string) {

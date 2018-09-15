@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Http } from '@angular/http';
+import { Http, RequestOptions } from '@angular/http';
 
 @Component({
     selector: 'edit-battery',
@@ -10,7 +10,8 @@ import { Http } from '@angular/http';
 export class EditBatteryComponent {
     private sub: any;
     private baseUrl: string;
-    public battery: Battery | undefined;
+    private battery: Battery | undefined;
+    private id: string | undefined;
     
     constructor(private route: ActivatedRoute, private http: Http, @Inject('BASE_URL') baseUrl: string) {
         this.baseUrl = baseUrl;
@@ -18,13 +19,19 @@ export class EditBatteryComponent {
     
     ngOnInit() {
 		this.sub = this.route.params.subscribe(params => {
-		//	console.log(params['id'])
-			let id = params['id'];
-			this.http.get(this.baseUrl + 'api/v1/battery/' + id).subscribe(result => {
+			this.id = params['id'];
+			this.http.get(this.baseUrl + 'api/v1/battery/' + this.id).subscribe(result => {
 		     	this.battery = result.json() as Battery
 			}, error => console.error(error));
 		});
     }
+
+    update() {
+        let body = JSON.stringify(this.battery);
+        this.http.put(this.baseUrl + 'api/v1/battery/' + this.id, body);
+    }
+
+    cancel() {}
 
     ngOnDestroy() {
         this.sub.unsubscribe();
