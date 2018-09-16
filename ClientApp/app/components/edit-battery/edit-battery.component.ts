@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Http, RequestOptions } from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 
 @Component({
     selector: 'edit-battery',
@@ -27,8 +27,13 @@ export class EditBatteryComponent {
     }
 
     update() {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        let options = new RequestOptions({ headers: headers });
         let body = JSON.stringify(this.battery);
-        this.http.put(this.baseUrl + 'api/v1/battery/' + this.id, body);
+        this.http.put(this.baseUrl + 'api/v1/battery/' + this.id, body, options).subscribe(result => {
+            this.battery = result.json() as Battery
+        }, error => console.error(error));
     }
 
     cancel() {}
@@ -42,7 +47,7 @@ interface Battery {
     id: string;
     name: string;
     lipoVoltage: string;
-    mah: string;
+    mah: number;
     cRating: string;
     plugType: string;
     weight: string;

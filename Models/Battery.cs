@@ -13,7 +13,7 @@ namespace Forge.Models
 		[BsonElement("LipoVoltage")]
 		public string LipoVoltage { get; set; }
 		[BsonElement("MAh")]
-		public string MAh { get; set; }
+		public int MAh { get; set; }
 		[BsonElement("CRating")]
 		public int CRating { get; set; }
 		[BsonElement("PlugType")]

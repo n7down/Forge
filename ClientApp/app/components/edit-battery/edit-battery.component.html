@@ -1,7 +1,7 @@
 <h1>Edit Battery</h1>
 
 <div>
-    <a [routerLink]="['/battery', battery.id]">
+    <a [routerLink]="['/battery', id]">
         <span class='glyphicon glyphicon-chevron-left'></span> Back
     </a>
     <br>
@@ -12,39 +12,39 @@
     <form>
         <div class="form-group">
             <label>ID</label>
-            <input type="id" class="form-control" id="id" value="{{ battery.id }}" disabled>
+            <input class="form-control" name="id" value="{{ battery.id }}" disabled>
         </div>
         <div class="form-group">
             <label>Name</label>
-            <input type="name" class="form-control" id="name" value="{{ battery.name }}">
+            <input class="form-control" name="name" [(ngModel)]="battery.name">
         </div>
         <div class="form-group">
             <label>Lipo Voltage</label>
-            <input type="lipovoltage" class="form-control" id="lipovoltage" value="{{ battery.lipoVoltage }}">
+            <input class="form-control" name="lipovoltage" [(ngModel)]="battery.lipoVoltage">
         </div>
         <div class="form-group">
             <label>Mah</label>
-            <input type="mah" class="form-control" id="mah" value="{{ battery.mah }}">
+            <input class="form-control" name="mah" [(ngModel)]="battery.mah">
         </div>
         <div class="form-group">
             <label>CRating</label>
-            <input type="crating" class="form-control" id="crating" value="{{ battery.cRating }}">
+            <input class="form-control" name="crating" [(ngModel)]="battery.cRating">
         </div>
         <div class="form-group">
             <label>PlugType</label>
-            <input type="plugType" class="form-control" id="plugType" value="{{ battery.plugType }}">
+            <input class="form-control" name="plugType" [(ngModel)]="battery.plugType">
         </div>
         <div class="form-group">
             <label>Weight</label>
-            <input type="weight" class="form-control" id="weight" value="{{ battery.weight }}">
+            <input class="form-control" name="weight" [(ngModel)]="battery.weight">
         </div>
         <div class="form-group">
             <label>Dimension</label>
-            <input type="dimension" class="form-control" id="dimension" value="{{ battery.dimension }}">
+            <input class="form-control" name="dimension" [(ngModel)]="battery.dimension">
         </div>
         <div class="form-group">
             <label>Link</label>
-            <input type="link" class="form-control" id="link" value="{{ battery.link }}">
+            <input class="form-control" name="link" [(ngModel)]="battery.link">
         </div>
     </form>
 </div>
