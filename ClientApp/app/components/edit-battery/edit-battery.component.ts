@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Http, RequestOptions, Headers } from '@angular/http';
 
 @Component({
@@ -13,7 +13,7 @@ export class EditBatteryComponent {
     private battery: Battery | undefined;
     private id: string | undefined;
     
-    constructor(private route: ActivatedRoute, private http: Http, @Inject('BASE_URL') baseUrl: string) {
+    constructor(private route: ActivatedRoute, private http: Http, @Inject('BASE_URL') baseUrl: string, private router: Router) {
         this.baseUrl = baseUrl;
     }
     
@@ -32,11 +32,11 @@ export class EditBatteryComponent {
         let options = new RequestOptions({ headers: headers });
         let body = JSON.stringify(this.battery);
         this.http.put(this.baseUrl + 'api/v1/battery/' + this.id, body, options).subscribe(result => {
-            this.battery = result.json() as Battery
+            this.battery = result.json() as Battery;
+            console.log("updated: " + this.battery.mah);
+            this.router.navigate(['/batteries']);
         }, error => console.error(error));
     }
-
-    cancel() {}
 
     ngOnDestroy() {
         this.sub.unsubscribe();

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Http } from '@angular/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Http, RequestOptions, Headers } from '@angular/http';
 
 @Component({
     selector: 'battery',
@@ -13,7 +13,7 @@ export class BatteryComponent implements OnInit, OnDestroy {
     public battery: Battery | undefined;
     public id: string | undefined;
     
-    constructor(private route: ActivatedRoute, private http: Http, @Inject('BASE_URL') baseUrl: string) {
+    constructor(private route: ActivatedRoute, private http: Http, @Inject('BASE_URL') baseUrl: string, private router: Router) {
         this.baseUrl = baseUrl;
     }
     
@@ -24,6 +24,15 @@ export class BatteryComponent implements OnInit, OnDestroy {
 		     	this.battery = result.json() as Battery
 			}, error => console.error(error));
 		});
+    }
+
+    remove() {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        let options = new RequestOptions({ headers: headers });
+        this.http.delete(this.baseUrl + 'api/v1/battery/' + this.id, options).subscribe(result => {
+            this.router.navigate(['/batteries']);
+        }, error => console.error(error));
     }
 
     ngOnDestroy() {

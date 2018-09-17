@@ -7,7 +7,7 @@
 	<a [routerLink]="['/edit/battery', id]">
 		<span class='glyphicon glyphicon-edit'></span> Edit
 	</a> |
-	<a [routerLink]="['/batteries']">
+	<a (click)="remove()">
 		<span class='glyphicon glyphicon-trash'></span> Remove
 	</a>
 </span>
