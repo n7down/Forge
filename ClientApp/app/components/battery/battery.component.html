@@ -6,9 +6,6 @@
 <span style="float:right;">
 	<a [routerLink]="['/edit/battery', id]">
 		<span class='glyphicon glyphicon-edit'></span> Edit
-	</a> |
-	<a (click)="remove()">
-		<span class='glyphicon glyphicon-trash'></span> Remove
 	</a>
 </span>
 <br>
@@ -30,7 +27,7 @@
 		</div>
 		<div class="form-group">
 			<label>MAh</label>
-			<input type="mah" class="form-control" id="mah" value="{{ battery.mah }}" disabled>
+			<input type="mah" class="form-control" id="mah" value="{{ battery.mAh }}" disabled>
 		</div>
 		<div class="form-group">
 			<label>CRating</label>

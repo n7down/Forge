@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 
 @Component({
     selector: 'batteries',
@@ -8,15 +8,29 @@ import { Http } from '@angular/http';
 })
 export class BatteriesComponent {
     public batteries: Battery[] = [];
+    private baseUrl: string;
+    private http: Http;
 
     constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {
-		http.get(baseUrl + 'api/v1/battery').subscribe(result => {
+        this.baseUrl = baseUrl;
+        this.http = http;
+        this.getData();
+    }
+    
+    getData() {
+		this.http.get(this.baseUrl + 'api/v1/battery').subscribe(result => {
             this.batteries = result.json() as Battery[];
         }, error => console.error(error));
     }
 
-    remove()
-    {}
+    remove(id: string) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        let options = new RequestOptions({ headers: headers });
+        this.http.delete(this.baseUrl + 'api/v1/battery/' + id, options).subscribe(result => {
+            this.getData();
+        }, error => console.error(error));
+    }
 }
 
 interface Battery {

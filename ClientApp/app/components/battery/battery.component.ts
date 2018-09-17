@@ -31,8 +31,8 @@ export class BatteryComponent implements OnInit, OnDestroy {
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: headers });
         this.http.delete(this.baseUrl + 'api/v1/battery/' + this.id, options).subscribe(result => {
-            this.router.navigate(['/batteries']);
         }, error => console.error(error));
+        this.router.navigate(['/batteries']);
     }
 
     ngOnDestroy() {

@@ -10,7 +10,7 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 export class EditBatteryComponent {
     private sub: any;
     private baseUrl: string;
-    private battery: Battery | undefined;
+    private battery: Battery;
     private id: string | undefined;
     
     constructor(private route: ActivatedRoute, private http: Http, @Inject('BASE_URL') baseUrl: string, private router: Router) {
@@ -33,7 +33,8 @@ export class EditBatteryComponent {
         let body = JSON.stringify(this.battery);
         this.http.put(this.baseUrl + 'api/v1/battery/' + this.id, body, options).subscribe(result => {
             this.battery = result.json() as Battery;
-            console.log("updated: " + this.battery.mah);
+            console.log("updated: " + this.battery.name);
+            console.log("updated: " + this.battery.mAh);
             this.router.navigate(['/batteries']);
         }, error => console.error(error));
     }
@@ -47,7 +48,7 @@ interface Battery {
     id: string;
     name: string;
     lipoVoltage: string;
-    mah: number;
+    mAh: string;
     cRating: string;
     plugType: string;
     weight: string;
