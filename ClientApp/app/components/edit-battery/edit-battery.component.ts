@@ -33,9 +33,7 @@ export class EditBatteryComponent {
         let body = JSON.stringify(this.battery);
         this.http.put(this.baseUrl + 'api/v1/battery/' + this.id, body, options).subscribe(result => {
             this.battery = result.json() as Battery;
-            console.log("updated: " + this.battery.name);
-            console.log("updated: " + this.battery.mAh);
-            this.router.navigate(['/batteries']);
+            this.router.navigate(['/battery/' + this.id]);
         }, error => console.error(error));
     }
 

@@ -27,7 +27,6 @@ export class CreateBatteryComponent {
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: headers });
         let body = JSON.stringify({ name: this.name, lipoVoltage: this.lipoVoltage, mah: this.mah, cRating: this.cRating, plugType: this.plugType, weight: this.weight, dimension: this.dimension, link: this.link });
-        console.log("creating: ", body);
         this.http.post(this.baseUrl + 'api/v1/battery/', body, options).subscribe(result => {
             this.router.navigate(['/batteries']);
         }, error => console.error(error));

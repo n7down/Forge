@@ -24,69 +24,17 @@
 
 <p *ngIf="!batteries"><em>Loading...</em></p>
 
-<!-- <table class='table' *ngIf="batteries">
+<table class='table' *ngIf="batteries">
     <thead>
         <tr>
             <th>Id</th>
             <th>Name</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
         <tr class='item' *ngFor="let battery of batteries">
             <td><a [routerLink]="['/battery', battery.id]">{{ battery.id }}</a></td>
             <td>{{ battery.name }}</td>
-            <td>
-                <span style="float:right;">
-                    <a [routerLink]="['/edit/battery', battery.id]">
-                        <span class='glyphicon glyphicon-edit'></span> Edit
-                    </a> |
-                    <a (click)="remove(battery.id)">
-                        <span class='glyphicon glyphicon-trash'></span> Remove
-                    </a>
-                </span>
-            </td>
-        </tr>
-    </tbody>
-</table> -->
-
-<table class='table' *ngIf="batteries">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class='item' *ngFor="let battery of batteries">
-            <table>
-                <tr>
-                    <td><a [routerLink]="['/battery', battery.id]">{{ battery.id }}</a></td>
-                    <td>{{ battery.name }}</td>
-                    <td>
-                        <span style="float:right;">
-                            <a [routerLink]="['/edit/battery', battery.id]">
-                                <span class='glyphicon glyphicon-edit'></span> Edit
-                            </a> |
-                            <a (click)="remove(battery.id)">
-                                <span class='glyphicon glyphicon-trash'></span> Remove
-                            </a>
-                        </span>
-                    </td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td>{{ battery.lipoVoltage }}</td>
-                </tr>
-                <tr>
-                    <td>{{ battery.mAh }}</td>
-                </tr>
-                <tr>
-                    <td>{{ battery.cRating }}</td>
-                </tr>
-            </table>
         </tr>
     </tbody>
 </table>
