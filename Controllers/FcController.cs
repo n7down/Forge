@@ -49,7 +49,7 @@ namespace Forge.Controllers
         public IActionResult Put(string id, [FromBody] FlightController flightController)
         {
             _repository.Update(id, flightController);
-            return new OkResult();
+            return CreatedAtRoute("GetFC", new { id = flightController.Id}, flightController);
         }
 
         // DELETE api/v1/fc/5

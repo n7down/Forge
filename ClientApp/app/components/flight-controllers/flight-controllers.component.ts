@@ -3,7 +3,8 @@ import { Http } from '@angular/http';
 
 @Component({
     selector: 'flight-controllers',
-    templateUrl: './flight-controllers.component.html'
+    templateUrl: './flight-controllers.component.html',
+    styleUrls: ['./flight-controllers.component.css']
 })
 export class FlightControllersComponent {
     public flightControllers: FlightController[] = [];

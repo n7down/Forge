@@ -64,7 +64,7 @@ namespace Forge.Repository
                 .Set(x => x.VideoIn, item.VideoIn)
                 .Set(x => x.VideoOut, item.VideoOut)
                 .Set(x => x.Buzzer, item.Buzzer)
-                .Set(x => x.NumberSoftSerial, item.NumberSoftSerial);
+                .Set(x => x.NumberSoftSerials, item.NumberSoftSerials);
 
             var updateResult = FlightControllers.UpdateOne(filter, update);
         }

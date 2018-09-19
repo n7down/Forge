@@ -25,7 +25,7 @@ namespace Forge.Models
 
         // weight in grams
         [BsonElement("Weight")]
-        public float Weight { get; set; }
+        public string Weight { get; set; }
         [BsonElement("NumberUARTS")]
         public int NumberUARTS { get; set; }
         [BsonElement("Barometer")]
@@ -44,7 +44,9 @@ namespace Forge.Models
         public bool VideoOut { get; set; }
         [BsonElement("Buzzer")]
         public bool Buzzer { get; set; }
-        [BsonElement("NumberSoftSerial")]
-        public int NumberSoftSerial { get; set; }
+        [BsonElement("NumberSoftSerials")]
+        public int NumberSoftSerials { get; set; }
+
+        // TODO: add dimensions
     }
 }

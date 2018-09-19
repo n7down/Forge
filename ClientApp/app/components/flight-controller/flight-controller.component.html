@@ -1,0 +1,92 @@
+<h1>Battery</h1>
+
+<a [routerLink]="['/flight-controllers']">
+    <span class='glyphicon glyphicon-chevron-left'></span> Back
+</a>
+<span style="float:right;">
+	<a [routerLink]="['/edit/flight-controller', id]">
+		<span class='glyphicon glyphicon-edit'></span> Edit
+	</a> |
+	<a (click)="remove(flight-controller.id)">
+		<span class='glyphicon glyphicon-trash'></span> Remove
+	</a>
+</span>
+<br>
+<br>
+
+<div *ngIf="flightController">
+    <form>
+        <div class="form-group">
+            <label>ID</label>
+            <input class="form-control" name="id" value="{{ flightController.id }}" disabled>
+        </div>
+        <div class="form-group">
+            <label>Name</label>
+            <input class="form-control" name="name" [(ngModel)]="flightController.name" disabled>
+        </div>
+        <div class="form-group">
+            <label>MCU</label>
+            <input class="form-control" name="mcu" [(ngModel)]="flightController.mcu" disabled>
+        </div>
+        <div class="form-group">
+            <label>Gyro Name</label>
+            <input class="form-control" name="gyroName" [(ngModel)]="flightController.gyroName" disabled>
+        </div>
+        <div class="form-group">
+            <label>OSD</label>
+            <input class="form-control" name="osd" [(ngModel)]="flightController.osd" disabled>
+        </div>
+        <div class="form-group">
+            <label>Lipo Voltage</label>
+            <input class="form-control" name="lipoVoltage" [(ngModel)]="flightController.lipoVoltage" disabled>
+        </div>
+        <div class="form-group">
+            <label>SD Card</label>
+            <input class="form-control" name="sdCard" [(ngModel)]="flightController.sdCard" disabled>
+        </div>
+        <div class="form-group">
+            <label>Weight</label>
+            <input class="form-control" name="weight" [(ngModel)]="flightController.weight" disabled>
+        </div>
+        <div class="form-group">
+            <label>Number Of UARTS</label>
+            <input class="form-control" name="numberUarts" [(ngModel)]="flightController.numberUarts" disabled>
+        </div>
+        <div class="form-group">
+            <label>Barometer</label>
+            <input class="form-control" name="barometer" [(ngModel)]="flightController.barometer" disabled>
+        </div>
+        <div class="form-group">
+            <label>PWM</label>
+            <input class="form-control" name="pwm" [(ngModel)]="flightController.pwm" disabled>
+        </div>
+        <div class="form-group">
+            <label>SBus</label>
+            <input class="form-control" name="sbus" [(ngModel)]="flightController.sbus" disabled>
+        </div>
+        <div class="form-group">
+            <label>DSM Two</label>
+            <input class="form-control" name="dsmTwo" [(ngModel)]="flightController.dsmTwo" disabled>
+        </div>
+        <div class="form-group">
+            <label>LED Strip</label>
+            <input class="form-control" name="ledStrip" [(ngModel)]="flightController.ledStrip" disabled>
+        </div>
+        <div class="form-group">
+            <label>Video In</label>
+            <input class="form-control" name="videoIn" [(ngModel)]="flightController.videoIn" disabled>
+        </div>
+        <div class="form-group">
+            <label>Video Out</label>
+            <input class="form-control" name="videoOut" [(ngModel)]="flightController.videoOut" disabled>
+        </div>
+        <div class="form-group">
+            <label>Buzzer</label>
+            <input class="form-control" name="buzzer" [(ngModel)]="flightController.buzzer" disabled>
+        </div>
+        <div class="form-group">
+            <label>Number Of Soft Serials</label>
+            <input class="form-control" name="numberSoftSerials" [(ngModel)]="flightController.numberSoftSerials" disabled>
+        </div>
+    </form>
+</div>

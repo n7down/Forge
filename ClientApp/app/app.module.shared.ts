@@ -15,6 +15,9 @@ import { CreateBatteryComponent } from './components/create-battery/create-batte
 import { EditBatteryComponent } from './components/edit-battery/edit-battery.component';
 import { BatteriesComponent } from './components/batteries/batteries.component';
 
+import { FlightControllerComponent } from './components/flight-controller/flight-controller.component';
+import { CreateFlightControllerComponent } from './components/create-flight-controller/create-flight-controller.component';
+import { EditFlightControllerComponent } from './components/edit-flight-controller/edit-flight-controller.component';
 import { FlightControllersComponent } from './components/flight-controllers/flight-controllers.component';
 
 
@@ -31,7 +34,10 @@ import { FlightControllersComponent } from './components/flight-controllers/flig
         EditBatteryComponent,
         BatteriesComponent,
 
-        FlightControllersComponent,
+        FlightControllerComponent,
+        CreateFlightControllerComponent,
+        EditFlightControllerComponent,
+        FlightControllersComponent
     ],
     imports: [
         CommonModule,
@@ -49,8 +55,11 @@ import { FlightControllersComponent } from './components/flight-controllers/flig
             { path: 'edit/battery/:id', component: EditBatteryComponent },
             { path: 'batteries', component: BatteriesComponent },
 
+            { path: 'flight-controller/:id', component: FlightControllerComponent },
+            { path: 'create/flight-controller', component: CreateFlightControllerComponent },
+            { path: 'edit/flight-controllers', component: EditFlightControllerComponent },
             { path: 'flight-controllers', component: FlightControllersComponent },
-            
+
             { path: '**', redirectTo: 'dashboard' }
         ])
     ]
