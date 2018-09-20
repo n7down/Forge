@@ -33,7 +33,7 @@ export class EditFlightControllerComponent {
         let body = JSON.stringify(this.flightController);
         this.http.put(this.baseUrl + 'api/v1/fc/' + this.id, body, options).subscribe(result => {
             this.flightController = result.json() as FlightController;
-            this.router.navigate(['/fc/' + this.id]);
+            this.router.navigate(['/flight-controller/' + this.id]);
         }, error => console.error(error));
     }
 

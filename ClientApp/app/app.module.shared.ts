@@ -57,7 +57,7 @@ import { FlightControllersComponent } from './components/flight-controllers/flig
 
             { path: 'flight-controller/:id', component: FlightControllerComponent },
             { path: 'create/flight-controller', component: CreateFlightControllerComponent },
-            { path: 'edit/flight-controller', component: EditFlightControllerComponent },
+            { path: 'edit/flight-controller/:id', component: EditFlightControllerComponent },
             { path: 'flight-controllers', component: FlightControllersComponent },
 
             { path: '**', redirectTo: 'dashboard' }
