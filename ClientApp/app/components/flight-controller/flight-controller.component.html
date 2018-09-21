@@ -32,20 +32,10 @@
             <label>Gyro Name</label>
             <input class="form-control" name="gyroName" [(ngModel)]="flightController.gyroName" disabled>
         </div>
-
-        <!-- FIXME: -->
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">SD Card</label>
-            </div>
-            <select class="osd-select" name="osd">
-                <option selected>false</option>
-                <option value="1">false</option>
-                <option value="2">true</option>
-            </select>
+        <div class="form-group">
+            <label>OSD</label>
+            <input class="form-control" name="osd" [(ngModel)]="flightController.osd" disabled>
         </div>
-        <br>
-          
         <div class="form-group">
             <label>Lipo Voltage</label>
             <input class="form-control" name="lipoVoltage" [(ngModel)]="flightController.lipoVoltage" disabled>
