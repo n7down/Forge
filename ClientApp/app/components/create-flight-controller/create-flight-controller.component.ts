@@ -12,7 +12,7 @@ export class CreateFlightControllerComponent {
     private name: string;
     private mcu: string;
     private gyroName: number;
-    private osd: string;
+    private osd: bool;
     private osdname: string;
     private pdb: string;
     private lipoVoltage: string;
