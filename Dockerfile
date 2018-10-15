@@ -3,7 +3,7 @@ WORKDIR /app
 
 # Copy csproj and restore as distinct layers
 COPY *.csproj ./
-COPY package.json
+COPY package.json ./
 RUN npm install
 RUN dotnet restore
 

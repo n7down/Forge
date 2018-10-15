@@ -9,14 +9,14 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 })
 export class CreateBatteryComponent {
     private baseUrl: string;
-    private name: string;
-    private lipoVoltage: string;
-    private mah: number;
-    private cRating: string;
-    private plugType: string;
-    private weight: string;
-    private dimension: string;
-    private link: string;
+    public name: string;
+    public lipoVoltage: string;
+    public mah: number;
+    public cRating: string;
+    public plugType: string;
+    public weight: string;
+    public dimension: string;
+    public link: string;
     
     constructor(private http: Http, @Inject('BASE_URL') baseUrl: string, private router: Router) {
         this.baseUrl = baseUrl;

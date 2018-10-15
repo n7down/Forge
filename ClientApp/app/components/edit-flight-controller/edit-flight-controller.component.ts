@@ -10,8 +10,8 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 export class EditFlightControllerComponent {
     private sub: any;
     private baseUrl: string;
-    private flightController: FlightController;
-    private id: string | undefined;
+    public flightController: FlightController;
+    public id: string | undefined;
     
     constructor(private route: ActivatedRoute, private http: Http, @Inject('BASE_URL') baseUrl: string, private router: Router) {
         this.baseUrl = baseUrl;

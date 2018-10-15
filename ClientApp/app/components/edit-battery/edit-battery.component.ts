@@ -10,8 +10,8 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 export class EditBatteryComponent {
     private sub: any;
     private baseUrl: string;
-    private battery: Battery;
-    private id: string | undefined;
+    public battery: Battery;
+    public id: string | undefined;
     
     constructor(private route: ActivatedRoute, private http: Http, @Inject('BASE_URL') baseUrl: string, private router: Router) {
         this.baseUrl = baseUrl;
