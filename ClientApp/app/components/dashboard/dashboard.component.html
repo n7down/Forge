@@ -1,12 +1,13 @@
-<h1>QCWAPI</h1>
-<h4>Welcome to Quadcopter Workbench API (QCWAPI)</h4>
+<h1>DFAPI</h1>
+<h4>Welcome to Drone Forge API (DFAPI)</h4>
 <h5>An API for the components that are used to build quadcopters</h5>
 
+<h5>Try it out</h5>
 <div class="row">
     <div class="col-lg-6">
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon3">http://qcwapi.com/api/v1/</span>
-            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" [(ngModel)]="input">
+            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" [(ngModel)]="input" (keyup.enter)="enterPressed()"/>
             <span class="input-group-btn">
                 <button (click)="request()" class="btn btn-primary" type="button">Request</button>
             </span>

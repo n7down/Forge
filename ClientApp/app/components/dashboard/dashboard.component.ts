@@ -22,6 +22,10 @@ export class DashboardComponent {
         }, error => console.error(error));
     }
 
+    public enterPressed() {
+        this.request();
+    }
+
     public request() {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
