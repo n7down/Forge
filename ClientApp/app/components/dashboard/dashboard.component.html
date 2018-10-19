@@ -2,9 +2,9 @@
 <h4>Welcome to Drone Forge API (DFAPI)</h4>
 <h5>An API for the components that are used to build quadcopters</h5>
 
-<h5>Try it out</h5>
 <div class="row">
     <div class="col-lg-6">
+        <label>Try it out:</label>
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon3">http://qcwapi.com/api/v1/</span>
             <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" [(ngModel)]="input" (keyup.enter)="enterPressed()"/>
@@ -12,6 +12,7 @@
                 <button (click)="request()" class="btn btn-primary" type="button">Request</button>
             </span>
         </div>
+        <p>Confused? Type typing in <b>fc/0</b> or <b>fc/1</b> above and press <b>enter</b> or click on the <b>request</b>button.</p>
     </div>
 </div>
 <br>
@@ -22,4 +23,12 @@
             <textarea style="resize: none;" class="form-control" rows="10">{{ data }}</textarea>
         </div>
     </div>
+</div>
+<div class="row">
+    <h5>What is this?</h5>
+    The Drone Forage API programmatically-accessible data source for all the data on quadcopter components. This API specifically is used for the data that gives detailed information on components that are used to build quadcopters.
+</div>
+<div class="row">
+    <h5>How can I use this?</h5>
+    For more detailed information please consult the <b>Documentation</b> section.
 </div>
