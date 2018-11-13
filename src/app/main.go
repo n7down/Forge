@@ -7,7 +7,10 @@ import (
 )
 
 func main() {
-	data.InitDb()
+	err := data.InitDb()
+	if err != nil {
+
+	}
 
 	router := gin.Default()
 

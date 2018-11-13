@@ -9,16 +9,18 @@ import (
 
 var db *sql.DB
 
-func InitDb() {
+func InitDb() error {
+	var err error
 	if db != nil {
-		return
+		return errors.New("db already created")
 	}
 
 	dbUser := "root"
-	dbPassword := ""
+	dbPassword := "root"
 	dbConnection := "forge"
 
-	db, _ = sql.Open("mysql", dbUser+":"+dbPassword+" @/"+dbConnection)
+	db, err = sql.Open("mysql", dbUser+":"+dbPassword+"@tcp(127.0.0.1:3306)/"+dbConnection)
+	return err
 }
 
 func GetDb() (*sql.DB, error) {

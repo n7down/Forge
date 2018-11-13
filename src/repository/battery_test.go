@@ -9,7 +9,7 @@ import (
 
 func TestBattery(t *testing.T) {
 	battery := models.Battery{
-		"test-battery",
+		"test-battery2",
 	}
 
 	data.InitDb()
