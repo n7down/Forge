@@ -3,9 +3,12 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/n7down/Forge/src/controllers"
+	"github.com/n7down/Forge/src/repository"
 )
 
 func main() {
+	repository.InitDB()
+
 	router := gin.Default()
 
 	router.GET("/ping", func(c *gin.Context) {
