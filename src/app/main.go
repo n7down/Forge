@@ -2,12 +2,12 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/n7down/Forge/src/controllers"
-	"github.com/n7down/Forge/src/repository"
+	controllers "github.com/n7down/Forge/src/controllers"
+	data "github.com/n7down/Forge/src/database"
 )
 
 func main() {
-	repository.InitDB()
+	data.InitDb()
 
 	router := gin.Default()
 
