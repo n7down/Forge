@@ -16,20 +16,25 @@ func CreateBattery(in request.Battery) error {
 	return err
 }
 
-func GetBatteries() (response.Battery, error) {
-	var batteries response.Battery
-	var err error
-	// query := "SELECT * FROM battery"
-	// db, err := data.GetDb()
-	// if err != nil {
-	// 	return batteries, err
-	// }
-	// rows, err := db.Exec(query)
-	// defer rows.Close()
-	// for rows.Next() {
-	// 	err = rows.Scan(
-	// 		&batteries.Name,
-	// 	)
-	// }
+func GetBatteries() ([]response.Battery, error) {
+	var (
+		battery   response.Battery
+		batteries []response.Battery
+		err       error
+	)
+
+	query := "SELECT name FROM battery"
+	db, err := data.GetDb()
+	if err != nil {
+		return batteries, err
+	}
+	rows, err := db.Query(query)
+	defer rows.Close()
+	for rows.Next() {
+		err = rows.Scan(
+			&battery.Name,
+		)
+		batteries = append(batteries, battery)
+	}
 	return batteries, err
 }

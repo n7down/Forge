@@ -19,7 +19,7 @@ func InitDb() error {
 	dbPassword := "root"
 	dbConnection := "forge"
 
-	db, err = sql.Open("mysql", dbUser+":"+dbPassword+"@tcp(127.0.0.1:3306)/"+dbConnection)
+	db, err = sql.Open("mysql", dbUser+":"+dbPassword+"@/"+dbConnection)
 	return err
 }
 

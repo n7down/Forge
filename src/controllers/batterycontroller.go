@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	request "github.com/n7down/Forge/src/models"
 	repository "github.com/n7down/Forge/src/repository"
@@ -8,9 +10,7 @@ import (
 
 func GetBatteries(c *gin.Context) {
 	d, _ := repository.GetBatteries()
-	c.JSON(200, gin.H{
-		"data": d,
-	})
+	c.JSON(http.StatusOK, d)
 }
 
 func GetBatteryById(c *gin.Context) {
