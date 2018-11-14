@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	request "github.com/n7down/Forge/src/models"
+	models "github.com/n7down/Forge/src/models"
 	repository "github.com/n7down/Forge/src/repository"
 )
 
@@ -22,7 +22,7 @@ func GetBatteryById(c *gin.Context) {
 }
 
 func AddBattery(c *gin.Context) {
-	var in request.Battery
+	var in models.BatteryRequest
 	c.BindJSON(&in)
 	repository.CreateBattery(in)
 

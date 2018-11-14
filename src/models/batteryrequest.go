@@ -1,5 +1,5 @@
 package models
 
-type Battery struct {
+type BatteryRequest struct {
 	Name string `json:"name"`
 }

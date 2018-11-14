@@ -2,11 +2,10 @@ package repository
 
 import (
 	data "github.com/n7down/Forge/src/database"
-	request "github.com/n7down/Forge/src/models"
-	response "github.com/n7down/Forge/src/models"
+	models "github.com/n7down/Forge/src/models"
 )
 
-func CreateBattery(in request.Battery) error {
+func CreateBattery(in models.BatteryRequest) error {
 	query := "INSERT INTO battery (name) VALUES (?)"
 	db, err := data.GetDb()
 	if err != nil {
@@ -16,14 +15,14 @@ func CreateBattery(in request.Battery) error {
 	return err
 }
 
-func GetBatteries() ([]response.Battery, error) {
+func GetBatteries() ([]models.BatteryResponse, error) {
 	var (
-		battery   response.Battery
-		batteries []response.Battery
+		battery   models.BatteryResponse
+		batteries []models.BatteryResponse
 		err       error
 	)
 
-	query := "SELECT name FROM battery"
+	query := "SELECT id, name FROM battery"
 	db, err := data.GetDb()
 	if err != nil {
 		return batteries, err
@@ -32,6 +31,7 @@ func GetBatteries() ([]response.Battery, error) {
 	defer rows.Close()
 	for rows.Next() {
 		err = rows.Scan(
+			&battery.Id,
 			&battery.Name,
 		)
 		batteries = append(batteries, battery)
