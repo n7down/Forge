@@ -26,5 +26,7 @@ func main() {
 	router.PUT("/battery", controllers.UpdateBattery)
 	router.DELETE("/battery/:id", controllers.DeleteBattery)
 
+	router.POST("/user/login", controllers.UserLogin)
+
 	router.Run(":8080")
 }
