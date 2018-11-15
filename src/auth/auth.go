@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	jwt "github.com/dgrijalva/jwt-go"
+	models "github.com/n7down/Forge/src/models"
 )
 
 func validateAlg(token *jwt.Token) (interface{}, error) {
@@ -14,13 +15,13 @@ func validateAlg(token *jwt.Token) (interface{}, error) {
 	return []byte("your-256-bit-secret"), nil
 }
 
-func ParseClaims(tokenString string) (Claims, error) {
+func ParseClaims(tokenString string) (models.Claims, error) {
 	token, err := jwt.Parse(tokenString, validateAlg)
 	if err != nil {
-		return Claims{}, errors.New("Token error")
+		return models.Claims{}, errors.New("Token error")
 	}
 	claims := token.Claims.(jwt.MapClaims)
-	var c Claims
+	var c models.Claims
 	c.Foo = claims["foo"].(string)
 	return c, nil
 }

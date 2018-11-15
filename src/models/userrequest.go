@@ -1,5 +1,5 @@
 package models
 
-type UserData struct {
-	data string `json:"data"`
+type TokenRequest struct {
+	token string `json:"token"`
 }
