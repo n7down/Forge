@@ -8,6 +8,14 @@ import (
 	repository "github.com/n7down/Forge/src/repository"
 )
 
+type BatteryInterface interface {
+	GetBatteries(c *gin.Context)
+	GetBatteryById(c *gin.Context)
+	AddBattery(c *gin.Context)
+	DeleteBattery(c *gin.Context)
+	UpdateBattery(c *gin.Context)
+}
+
 func GetBatteries(c *gin.Context) {
 	d, _ := repository.GetBatteries()
 	c.JSON(http.StatusOK, d)
