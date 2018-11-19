@@ -7,7 +7,7 @@ import (
 )
 
 func (e *Env) GetBatteries(c *gin.Context) {
-	batteries, err := e.DB.GetAllBatteries()
+	batteries, err := e.Db.GetAllBatteries()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
 	}

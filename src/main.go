@@ -11,7 +11,7 @@ func main() {
 	if err != nil {
 
 	}
-	env := &controllers.Env{DB: db}
+	env := &controllers.Env{Db: db}
 
 	router := gin.Default()
 

@@ -23,7 +23,7 @@ func TestGetBatteriesNoContent(t *testing.T) {
 	assert := assert.New(t)
 
 	gin.SetMode(gin.TestMode)
-	env := &Env{DB: mockBatteryDatastore}
+	env := &Env{Db: mockBatteryDatastore}
 
 	router := gin.Default()
 	router.GET("/battery", env.GetBatteries)
@@ -54,7 +54,7 @@ func TestGetBatteriesWithContent(t *testing.T) {
 	assert := assert.New(t)
 
 	gin.SetMode(gin.TestMode)
-	env := &Env{DB: mockBatteryDatastore}
+	env := &Env{Db: mockBatteryDatastore}
 
 	router := gin.Default()
 	router.GET("/battery", env.GetBatteries)
