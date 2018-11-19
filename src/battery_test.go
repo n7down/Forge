@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	models "github.com/n7down/Forge/src/models"
+	"github.com/stretchr/testify/assert"
 )
 
 type MockedDB struct{}
@@ -19,6 +20,8 @@ func (db *MockedDB) GetAllBatteries() ([]*models.BatteryResponse, error) {
 }
 
 func TestGetBatteries(t *testing.T) {
+	assert := assert.New(t)
+
 	gin.SetMode(gin.TestMode)
 	env := &Env{db: &MockedDB{}}
 
@@ -33,12 +36,8 @@ func TestGetBatteries(t *testing.T) {
 
 	router.ServeHTTP(w, req)
 
-	if w.Code != http.StatusOK {
-		t.Fatalf("Expected to get status %d but instead got %d\n", http.StatusOK, w.Code)
-	}
+	assert.Equal(w.Code, http.StatusOK, "Expected to get status %d but instead got %d\n", w.Code, http.StatusOK)
 	expected := "[{\"id\":1,\"name\":\"test-battery0\"},{\"id\":2,\"name\":\"test-battery1\"}]"
 	actual := w.Body.String()
-	if expected != actual {
-		t.Errorf("\n...expected = %v\n...obtained = %v", expected, w.Body.String())
-	}
+	assert.Equal(expected, actual, "Expected to get %v but instead got %v \n", expected, actual)
 }
