@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	data "github.com/n7down/Forge/src/database"
 	"github.com/n7down/Forge/src/models"
 )
 
@@ -74,7 +73,7 @@ func (e *Env) UpdateBattery(c *gin.Context) {
 }
 
 func main() {
-	db, err := data.GetDb()
+	db, err := models.GetDb()
 	if err != nil {
 
 	}
