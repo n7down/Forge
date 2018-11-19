@@ -1,7 +1,6 @@
 package main
 
 import (
-	"database/sql"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -9,36 +8,18 @@ import (
 )
 
 type Env struct {
-	db *sql.DB
+	db models.BatteryDatastore
 }
 
 func (e *Env) GetBatteries(c *gin.Context) {
-	var (
-		battery   models.BatteryResponse
-		batteries []models.BatteryResponse
-		err       error
-	)
-
-	query := "SELECT id, name FROM battery"
-	rows, err := e.db.Query(query)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, err.Error())
-	}
-	defer rows.Close()
-	for rows.Next() {
-		err = rows.Scan(
-			&battery.Id,
-			&battery.Name,
-		)
-		batteries = append(batteries, battery)
-	}
+	batteries, err := e.db.GetAllBatteries()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
 	}
 	c.JSON(http.StatusOK, batteries)
 }
 
-func (e *Env) GetBatteryById(c *gin.Context) {
+func GetBatteryById(c *gin.Context) {
 	id := c.Param("id")
 	c.JSON(200, gin.H{
 		"message": "battery",
@@ -46,27 +27,27 @@ func (e *Env) GetBatteryById(c *gin.Context) {
 	})
 }
 
-func (e *Env) AddBattery(c *gin.Context) {
-	var in models.BatteryRequest
-	c.BindJSON(&in)
-	query := "INSERT INTO battery (name) VALUES (?)"
-	_, err := e.db.Exec(query, in.Name)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, err.Error())
-	}
+// func (e *Env) AddBattery(c *gin.Context) {
+// 	var in models.BatteryRequest
+// 	c.BindJSON(&in)
+// 	query := "INSERT INTO battery (name) VALUES (?)"
+// 	_, err := e.db.Exec(query, in.Name)
+// 	if err != nil {
+// 		c.JSON(http.StatusInternalServerError, err.Error())
+// 	}
 
-	c.JSON(200, gin.H{
-		"message": "battery created",
-	})
-}
+// 	c.JSON(200, gin.H{
+// 		"message": "battery created",
+// 	})
+// }
 
-func (e *Env) DeleteBattery(c *gin.Context) {
+func DeleteBattery(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"message": "battery deleted",
 	})
 }
 
-func (e *Env) UpdateBattery(c *gin.Context) {
+func UpdateBattery(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"message": "battery updated",
 	})
@@ -77,14 +58,11 @@ func main() {
 	if err != nil {
 
 	}
-	env := &Env{db: db}
+	env := &Env{db}
 
 	router := gin.Default()
 
 	router.GET("/battery", env.GetBatteries)
-	router.GET("/battery/:id", env.GetBatteryById)
-	router.POST("/battery", env.AddBattery)
-	router.PUT("/battery", env.UpdateBattery)
-	router.DELETE("/battery/:id", env.DeleteBattery)
+	// router.POST("/battery", AddBattery)
 	router.Run()
 }

@@ -9,33 +9,21 @@ import (
 	models "github.com/n7down/Forge/src/models"
 )
 
-type mockedDB struct{}
+type MockedDB struct{}
 
-type mockedEnv struct {
-	db mockedDB
-}
-
-func (db *mockedDB) GetAllBatteries() ([]*models.BatteryResponse, error) {
+func (db *MockedDB) GetAllBatteries() ([]*models.BatteryResponse, error) {
 	batteries := make([]*models.BatteryResponse, 0)
 	batteries = append(batteries, &models.BatteryResponse{1, "test-battery0"})
 	batteries = append(batteries, &models.BatteryResponse{2, "test-battery1"})
 	return batteries, nil
 }
 
-func (m *mockedEnv) GetBatteriesController(c *gin.Context) {
-	batteries, err := m.db.GetAllBatteries()
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, err.Error())
-	}
-	c.JSON(http.StatusOK, batteries)
-}
-
 func TestGetBatteries(t *testing.T) {
 	gin.SetMode(gin.TestMode)
-	env := &mockedEnv{db: mockedDB{}}
+	env := &Env{db: &MockedDB{}}
 
 	router := gin.Default()
-	router.GET("/battery", env.GetBatteriesController)
+	router.GET("/battery", env.GetBatteries)
 	req, err := http.NewRequest(http.MethodGet, "/battery", nil)
 
 	if err != nil {
