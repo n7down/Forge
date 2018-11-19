@@ -2,30 +2,23 @@ package database
 
 import (
 	"database/sql"
-	"errors"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
-var db *sql.DB
-
-func InitDb() error {
-	var err error
-	if db != nil {
-		return errors.New("db already created")
-	}
-
+func GetDb() (*sql.DB, error) {
 	dbUser := "root"
 	dbPassword := "root"
 	dbConnection := "forge"
 
-	db, err = sql.Open("mysql", dbUser+":"+dbPassword+"@/"+dbConnection)
-	return err
-}
-
-func GetDb() (*sql.DB, error) {
-	if db == nil {
-		return db, errors.New("no db")
+	db, err := sql.Open("mysql", dbUser+":"+dbPassword+"@/"+dbConnection)
+	if err != nil {
+		return nil, err
 	}
 	return db, nil
+}
+
+// TODO: do i need to close the database?
+func CloseDb(db *sql.DB) {
+	db.Close()
 }
