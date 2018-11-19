@@ -61,9 +61,8 @@ func TestGetBatteriesNoContent(t *testing.T) {
 	router.GET("/battery", env.GetBatteries)
 	req, err := http.NewRequest(http.MethodGet, "/battery", nil)
 
-	if err != nil {
-		t.Fatalf("Couldn't create request: %v\n", err)
-	}
+	assert.Nil(err, "Couldn't create request: %v\n", err)
+
 	w := httptest.NewRecorder()
 
 	router.ServeHTTP(w, req)
@@ -93,9 +92,8 @@ func TestGetBatteriesWithContent(t *testing.T) {
 	router.GET("/battery", env.GetBatteries)
 	req, err := http.NewRequest(http.MethodGet, "/battery", nil)
 
-	if err != nil {
-		t.Fatalf("Couldn't create request: %v\n", err)
-	}
+	assert.Nil(err, "Couldn't create request: %v\n", err)
+
 	w := httptest.NewRecorder()
 
 	router.ServeHTTP(w, req)
