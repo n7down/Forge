@@ -71,3 +71,32 @@ func TestGetBatteriesWithContent(t *testing.T) {
 	actual := w.Body.String()
 	assert.Equal(expected, actual, "Expected to get %v but instead got %v \n", expected, actual)
 }
+
+// TODO: test this
+func TestAddBattery(t *testing.T) {
+	mockCtrl := gomock.NewController(t)
+	defer mockCtrl.Finish()
+
+	mockBatteryDatastore := mocks.NewMockBatteryDatastore(mockCtrl)
+
+	var battery models.BatteryRequest
+	battery.Name = "test-battery"
+
+	mockBatteryDatastore.EXPECT().AddBattery(battery).Return(nil)
+
+	assert := assert.New(t)
+
+	gin.SetMode(gin.TestMode)
+	env := &Env{Db: mockBatteryDatastore}
+
+	router := gin.Default()
+	router.GET("/battery", env.GetBatteries)
+	req, err := http.NewRequest(http.MethodGet, "/battery", nil)
+
+	assert.Nil(err, "Couldn't create request: %v\n", err)
+
+	w := httptest.NewRecorder()
+
+	router.ServeHTTP(w, req)
+
+}

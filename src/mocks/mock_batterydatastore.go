@@ -33,6 +33,18 @@ func (m *MockBatteryDatastore) EXPECT() *MockBatteryDatastoreMockRecorder {
 	return m.recorder
 }
 
+// AddBattery mocks base method
+func (m *MockBatteryDatastore) AddBattery(arg0 models.BatteryRequest) error {
+	ret := m.ctrl.Call(m, "AddBattery", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// AddBattery indicates an expected call of AddBattery
+func (mr *MockBatteryDatastoreMockRecorder) AddBattery(arg0 interface{}) *gomock.Call {
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddBattery", reflect.TypeOf((*MockBatteryDatastore)(nil).AddBattery), arg0)
+}
+
 // GetAllBatteries mocks base method
 func (m *MockBatteryDatastore) GetAllBatteries() ([]*models.BatteryResponse, error) {
 	ret := m.ctrl.Call(m, "GetAllBatteries")

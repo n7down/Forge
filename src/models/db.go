@@ -3,7 +3,7 @@ package models
 import (
 	"database/sql"
 
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/lib/pq"
 )
 
 type DB struct {
@@ -34,12 +34,20 @@ func (db *DB) GetAllBatteries() ([]*BatteryResponse, error) {
 	return batteries, nil
 }
 
-func GetDb() (*DB, error) {
-	dbUser := "root"
-	dbPassword := "root"
-	dbConnection := "forge"
+func (db *DB) AddBattery(in BatteryRequest) error {
+	var err error
+	query := "INSERT INTO battery (name) VALUES ($1)"
+	_, err = db.DB.Query(query, in.Name)
+	return err
+}
 
-	db, err := sql.Open("mysql", dbUser+":"+dbPassword+"@/"+dbConnection)
+func GetDb() (*DB, error) {
+	dbUser := "postgres"
+	dbPassword := "postgres"
+	dbName := "forge"
+	connectionString := "postgres://" + dbUser + ":" + dbPassword + "@localhost/" + dbName + "?sslmode=disable"
+
+	db, err := sql.Open("postgres", connectionString)
 	if err != nil {
 		return nil, err
 	}

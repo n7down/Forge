@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/n7down/Forge/src/models"
 )
 
 func (e *Env) GetBatteries(c *gin.Context) {
@@ -26,13 +27,12 @@ func GetBatteryById(c *gin.Context) {
 }
 
 func (e *Env) AddBattery(c *gin.Context) {
-	// var in models.BatteryRequest
-	// c.BindJSON(&in)
-	// query := "INSERT INTO battery (name) VALUES (?)"
-	// _, err := e.db.Exec(query, in.Name)
-	// if err != nil {
-	// 	c.JSON(http.StatusInternalServerError, err.Error())
-	// }
+	var in models.BatteryRequest
+	c.BindJSON(&in)
+	err := e.Db.AddBattery(in)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, err.Error())
+	}
 
 	c.JSON(200, gin.H{
 		"message": "battery created",

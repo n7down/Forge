@@ -12,3 +12,5 @@
 *.out
 
 src/main
+.vscode/
+main
