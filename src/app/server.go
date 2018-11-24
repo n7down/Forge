@@ -16,6 +16,6 @@ func main() {
 	router := gin.Default()
 
 	router.GET("/battery", env.GetBatteries)
-	// router.POST("/battery", AddBattery)
+	router.POST("/battery", env.AddBattery)
 	router.Run()
 }

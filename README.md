@@ -8,6 +8,6 @@ An API for the components that are used to build quadcopters
 
 ## Getting Started
 1. Clone this directory with `https://github.com/n7down/Forge.git`
-2. Run `docker run -it --name mongo -p 27017:27017 -p 28017:28017 -d mongo` to start the mongo database
-3. Run `go build` in the src directory
-4. Run `go run main.go` in the src directory
+2. Run `docker build -t forge-db dockerfiles/db` to start the postgres database
+3. Run `go build src/main.go`
+4. Run `go run src/main.go`

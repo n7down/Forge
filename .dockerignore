@@ -1,0 +1,6 @@
+.git/*
+.gitignore
+docker-compose.yml
+dockerfiles/*
+README.md
+.vscode/*

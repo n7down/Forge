@@ -20,7 +20,7 @@ func (e *Env) GetBatteries(c *gin.Context) {
 
 func GetBatteryById(c *gin.Context) {
 	id := c.Param("id")
-	c.JSON(200, gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"message": "battery",
 		"id":      id,
 	})
@@ -33,8 +33,7 @@ func (e *Env) AddBattery(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
 	}
-
-	c.JSON(200, gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"message": "battery created",
 	})
 }
