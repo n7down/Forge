@@ -4,3 +4,4 @@ docker-compose.yml
 dockerfiles/*
 README.md
 .vscode/*
+mocks/*

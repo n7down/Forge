@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/n7down/Forge/src/models"
+	"github.com/n7down/Forge/models"
 )
 
 func (e *Env) GetBatteries(c *gin.Context) {

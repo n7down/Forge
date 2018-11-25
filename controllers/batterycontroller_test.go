@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/golang/mock/gomock"
-	"github.com/n7down/Forge/src/mocks"
+	"github.com/n7down/Forge/mocks"
 )
 
 func TestGetBatteriesNoContent(t *testing.T) {

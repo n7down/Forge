@@ -1,6 +1,6 @@
 package controllers
 
-import "github.com/n7down/Forge/src/models"
+import "github.com/n7down/Forge/models"
 
 type Env struct {
 	Db models.BatteryDatastore
