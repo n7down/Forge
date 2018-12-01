@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
-	"github.com/n7down/Forge/src/models"
+	"github.com/n7down/Forge/models"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/golang/mock/gomock"
@@ -98,5 +98,5 @@ func TestAddBattery(t *testing.T) {
 
 	router.ServeHTTP(w, req)
 
-	assert.Equal(w.Code, http.StatusOK, "Expected to get status %d but instead got %d\n", w.Code, http.StatusOK)
+	assert.Equal(http.StatusOK, w.Code, "Expected to get status %d but instead got %d\n", http.StatusOK, w.Code)
 }
