@@ -1,8 +1,6 @@
 package models
 
-import (
-	"database/sql"
-)
+import ()
 
 type MotorRequest struct {
 	Name string `json:"name"`
@@ -13,11 +11,7 @@ type MotorResponse struct {
 	Name string `json:"name"`
 }
 
-type Motor struct {
-	Db *sql.DB
-}
-
-func (m Motor) GetAll() ([]*MotorResponse, error) {
+func (m DB) GetAllMotors() ([]*MotorResponse, error) {
 	var err error
 
 	query := "SELECT id, name FROM motor"
@@ -41,7 +35,7 @@ func (m Motor) GetAll() ([]*MotorResponse, error) {
 	return motors, nil
 }
 
-func (m Motor) Add(in MotorRequest) error {
+func (m DB) AddMotor(in MotorRequest) error {
 	var err error
 	query := "INSERT INTO motor (name) VALUES ($1)"
 	_, err = m.Db.Query(query, in.Name)

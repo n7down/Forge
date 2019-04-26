@@ -1,6 +1,9 @@
 package models
 
 type Datastore interface {
-	GetAll() ([]*interface{}, error)
-	Add(interface{}) error
+	GetAllBatteries() ([]*BatteryResponse, error)
+	AddBattery(BatteryRequest) error
+
+	GetAllMotors() ([]*MotorResponse, error)
+	AddMotor(MotorRequest) error
 }

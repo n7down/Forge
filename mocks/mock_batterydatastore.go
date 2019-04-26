@@ -35,6 +35,7 @@ func (m *MockBatteryDatastore) EXPECT() *MockBatteryDatastoreMockRecorder {
 
 // AddBattery mocks base method
 func (m *MockBatteryDatastore) AddBattery(arg0 models.BatteryRequest) error {
+	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddBattery", arg0)
 	ret0, _ := ret[0].(error)
 	return ret0
@@ -42,11 +43,13 @@ func (m *MockBatteryDatastore) AddBattery(arg0 models.BatteryRequest) error {
 
 // AddBattery indicates an expected call of AddBattery
 func (mr *MockBatteryDatastoreMockRecorder) AddBattery(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddBattery", reflect.TypeOf((*MockBatteryDatastore)(nil).AddBattery), arg0)
 }
 
 // GetAllBatteries mocks base method
 func (m *MockBatteryDatastore) GetAllBatteries() ([]*models.BatteryResponse, error) {
+	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAllBatteries")
 	ret0, _ := ret[0].([]*models.BatteryResponse)
 	ret1, _ := ret[1].(error)
@@ -55,5 +58,6 @@ func (m *MockBatteryDatastore) GetAllBatteries() ([]*models.BatteryResponse, err
 
 // GetAllBatteries indicates an expected call of GetAllBatteries
 func (mr *MockBatteryDatastoreMockRecorder) GetAllBatteries() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAllBatteries", reflect.TypeOf((*MockBatteryDatastore)(nil).GetAllBatteries))
 }

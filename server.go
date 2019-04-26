@@ -28,8 +28,8 @@ func main() {
 	router.POST("/battery", env.AddBattery)
 
 	//env = &controllers.Env{Datastore: motor}
-	router.GET("/motor", env.GetMotors)
-	router.POST("/motor", env.AddMotor)
+	//router.GET("/motor", env.GetMotors)
+	//router.POST("/motor", env.AddMotor)
 
 	router.Run()
 }

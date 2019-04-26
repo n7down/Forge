@@ -8,7 +8,7 @@ import (
 )
 
 func (e *Env) GetMotors(c *gin.Context) {
-	motors, err := e.Datastore.GetAll()
+	motors, err := e.Datastore.GetAllMotors()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
 	}
@@ -21,7 +21,7 @@ func (e *Env) GetMotors(c *gin.Context) {
 func (e *Env) AddMotor(c *gin.Context) {
 	var in models.MotorRequest
 	c.BindJSON(&in)
-	err := e.Datastore.Add(in)
+	err := e.Datastore.AddMotor(in)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
 	}

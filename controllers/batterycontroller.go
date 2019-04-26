@@ -8,7 +8,7 @@ import (
 )
 
 func (e *Env) GetBatteries(c *gin.Context) {
-	batteries, err := e.Datastore.GetAll()
+	batteries, err := e.Datastore.GetAllBatteries()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
 	}
@@ -21,7 +21,7 @@ func (e *Env) GetBatteries(c *gin.Context) {
 func (e *Env) AddBattery(c *gin.Context) {
 	var in models.BatteryRequest
 	c.BindJSON(&in)
-	err := e.Datastore.Add(in)
+	err := e.Datastore.AddBattery(in)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
 	}
