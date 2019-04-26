@@ -1,17 +1,19 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/n7down/Forge/controllers"
 	"github.com/n7down/Forge/models"
 )
 
 func main() {
-	db, err := models.GetDb()
+	d, err := models.GetDatastore()
 	if err != nil {
-
+		fmt.Printf("error starting the database: %v", err.Error())
+		return
 	}
-	env := &controllers.Env{Db: db}
+	env := &controllers.Env{Datastore: d}
 
 	router := gin.Default()
 

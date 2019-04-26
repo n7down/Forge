@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"bytes"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -23,7 +24,7 @@ func TestGetBatteriesNoContent(t *testing.T) {
 	assert := assert.New(t)
 
 	gin.SetMode(gin.TestMode)
-	env := &Env{Db: mockBatteryDatastore}
+	env := &Env{Datastore: mockBatteryDatastore}
 
 	router := gin.Default()
 	router.GET("/battery", env.GetBatteries)
@@ -54,7 +55,7 @@ func TestGetBatteriesWithContent(t *testing.T) {
 	assert := assert.New(t)
 
 	gin.SetMode(gin.TestMode)
-	env := &Env{Db: mockBatteryDatastore}
+	env := &Env{Datastore: mockBatteryDatastore}
 
 	router := gin.Default()
 	router.GET("/battery", env.GetBatteries)
@@ -83,14 +84,15 @@ func TestAddBattery(t *testing.T) {
 
 	mockBatteryDatastore.EXPECT().AddBattery(battery).Return(nil)
 
+	var jsonStr = []byte(`{"name":"test-battery"}`)
 	assert := assert.New(t)
 
 	gin.SetMode(gin.TestMode)
-	env := &Env{Db: mockBatteryDatastore}
+	env := &Env{Datastore: mockBatteryDatastore}
 
 	router := gin.Default()
-	router.GET("/battery", env.AddBattery)
-	req, err := http.NewRequest(http.MethodPost, "/battery", nil)
+	router.POST("/battery", env.AddBattery)
+	req, err := http.NewRequest(http.MethodPost, "/battery", bytes.NewBuffer(jsonStr))
 
 	assert.Nil(err, "Couldn't create request: %v\n", err)
 
@@ -99,4 +101,7 @@ func TestAddBattery(t *testing.T) {
 	router.ServeHTTP(w, req)
 
 	assert.Equal(http.StatusOK, w.Code, "Expected to get status %d but instead got %d\n", http.StatusOK, w.Code)
+	expected := "{\"message\":\"battery created\"}"
+	actual := w.Body.String()
+	assert.Equal(expected, actual, "Expected to get %v but instead got %v \n", expected, actual)
 }
