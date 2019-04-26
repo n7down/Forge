@@ -8,7 +8,7 @@ import (
 )
 
 func (e *Env) GetBatteries(c *gin.Context) {
-	batteries, err := e.Datastore.GetAllBatteries()
+	batteries, err := e.Datastore.GetAll()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
 	}
@@ -18,23 +18,23 @@ func (e *Env) GetBatteries(c *gin.Context) {
 	c.JSON(http.StatusOK, batteries)
 }
 
-func GetBatteryById(c *gin.Context) {
-	id := c.Param("id")
-	c.JSON(http.StatusOK, gin.H{
-		"message": "battery",
-		"id":      id,
-	})
-}
-
 func (e *Env) AddBattery(c *gin.Context) {
 	var in models.BatteryRequest
 	c.BindJSON(&in)
-	err := e.Datastore.AddBattery(in)
+	err := e.Datastore.Add(in)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"message": "battery created",
+	})
+}
+
+func GetBatteryById(c *gin.Context) {
+	id := c.Param("id")
+	c.JSON(http.StatusOK, gin.H{
+		"message": "battery",
+		"id":      id,
 	})
 }
 

@@ -1,5 +1,9 @@
 package models
 
+import (
+	"database/sql"
+)
+
 type BatteryRequest struct {
 	Name string `json:"name"`
 }
@@ -9,11 +13,15 @@ type BatteryResponse struct {
 	Name string `json:"name"`
 }
 
-func (d *Datastore) GetAllBatteries() ([]*BatteryResponse, error) {
+type Battery struct {
+	Db *sql.DB
+}
+
+func (b Battery) GetAll() ([]*BatteryResponse, error) {
 	var err error
 
 	query := "SELECT id, name FROM battery"
-	rows, err := d.Db.Query(query)
+	rows, err := b.Db.Query(query)
 	if err != nil {
 		return nil, err
 	}
@@ -33,9 +41,9 @@ func (d *Datastore) GetAllBatteries() ([]*BatteryResponse, error) {
 	return batteries, nil
 }
 
-func (d *Datastore) AddBattery(in BatteryRequest) error {
+func (b Battery) Add(in BatteryRequest) error {
 	var err error
 	query := "INSERT INTO battery (name) VALUES ($1)"
-	_, err = d.Db.Query(query, in.Name)
+	_, err = b.Db.Query(query, in.Name)
 	return err
 }

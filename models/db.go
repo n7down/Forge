@@ -7,7 +7,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-type Datastore struct {
+type DB struct {
 	Db *sql.DB
 }
 
@@ -18,7 +18,21 @@ func getEnv(key, fallback string) string {
 	return fallback
 }
 
-func GetDatastore() (*Datastore, error) {
+//func GetDB() (*DB, error) {
+//dbUser := "postgres"
+//dbPassword := "postgres"
+//dbName := "forge"
+//dbHost := getEnv("DB_HOST", "localhost")
+//connectionString := "postgres://" + dbUser + ":" + dbPassword + "@" + dbHost + "/" + dbName + "?sslmode=disable"
+
+//db, err := sql.Open("postgres", connectionString)
+//if err != nil {
+//return nil, err
+//}
+//return &DB{Db: db}, nil
+//}
+
+func GetDB() (*sql.DB, error) {
 	dbUser := "postgres"
 	dbPassword := "postgres"
 	dbName := "forge"
@@ -29,7 +43,7 @@ func GetDatastore() (*Datastore, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &Datastore{Db: db}, nil
+	return db, nil
 }
 
 // TODO: do i need to close the database?
