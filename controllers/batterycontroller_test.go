@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
-	"github.com/n7down/Forge/models"
+	//"github.com/n7down/Forge/models"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/golang/mock/gomock"
@@ -18,9 +18,9 @@ func TestGetBatteriesNoContent(t *testing.T) {
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 
-	db, _ := models.GetDB()
+	// FIXME: need to update this
 	mockBatteryRepository := mocks.NewMockBatteryRepository(mockCtrl)
-	mockBatteryRepository.EXPECT().GetAllBatteries(db).Return(nil, nil)
+	mockBatteryRepository.EXPECT().GetAllBatteries().Return(nil, nil)
 
 	assert := assert.New(t)
 

@@ -5,7 +5,6 @@
 package mocks
 
 import (
-	sql "database/sql"
 	gomock "github.com/golang/mock/gomock"
 	models "github.com/n7down/Forge/models"
 	reflect "reflect"
@@ -35,26 +34,30 @@ func (m *MockBatteryRepository) EXPECT() *MockBatteryRepositoryMockRecorder {
 }
 
 // AddBattery mocks base method
-func (m *MockBatteryRepository) AddBattery(arg0 *sql.DB, arg1 models.BatteryRequest) error {
-	ret := m.ctrl.Call(m, "AddBattery", arg0, arg1)
+func (m *MockBatteryRepository) AddBattery(arg0 models.BatteryRequest) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddBattery", arg0)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // AddBattery indicates an expected call of AddBattery
-func (mr *MockBatteryRepositoryMockRecorder) AddBattery(arg0, arg1 interface{}) *gomock.Call {
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddBattery", reflect.TypeOf((*MockBatteryRepository)(nil).AddBattery), arg0, arg1)
+func (mr *MockBatteryRepositoryMockRecorder) AddBattery(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddBattery", reflect.TypeOf((*MockBatteryRepository)(nil).AddBattery), arg0)
 }
 
 // GetAllBatteries mocks base method
-func (m *MockBatteryRepository) GetAllBatteries(arg0 *sql.DB) ([]*models.BatteryResponse, error) {
-	ret := m.ctrl.Call(m, "GetAllBatteries", arg0)
+func (m *MockBatteryRepository) GetAllBatteries() ([]*models.BatteryResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAllBatteries")
 	ret0, _ := ret[0].([]*models.BatteryResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetAllBatteries indicates an expected call of GetAllBatteries
-func (mr *MockBatteryRepositoryMockRecorder) GetAllBatteries(arg0 interface{}) *gomock.Call {
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAllBatteries", reflect.TypeOf((*MockBatteryRepository)(nil).GetAllBatteries), arg0)
+func (mr *MockBatteryRepositoryMockRecorder) GetAllBatteries() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAllBatteries", reflect.TypeOf((*MockBatteryRepository)(nil).GetAllBatteries))
 }

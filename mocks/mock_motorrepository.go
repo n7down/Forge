@@ -35,6 +35,7 @@ func (m *MockMotorRepository) EXPECT() *MockMotorRepositoryMockRecorder {
 
 // AddMotor mocks base method
 func (m *MockMotorRepository) AddMotor(arg0 models.MotorRequest) error {
+	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddMotor", arg0)
 	ret0, _ := ret[0].(error)
 	return ret0
@@ -42,11 +43,13 @@ func (m *MockMotorRepository) AddMotor(arg0 models.MotorRequest) error {
 
 // AddMotor indicates an expected call of AddMotor
 func (mr *MockMotorRepositoryMockRecorder) AddMotor(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddMotor", reflect.TypeOf((*MockMotorRepository)(nil).AddMotor), arg0)
 }
 
 // GetAllMotors mocks base method
 func (m *MockMotorRepository) GetAllMotors() ([]*models.MotorResponse, error) {
+	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAllMotors")
 	ret0, _ := ret[0].([]*models.MotorResponse)
 	ret1, _ := ret[1].(error)
@@ -55,5 +58,6 @@ func (m *MockMotorRepository) GetAllMotors() ([]*models.MotorResponse, error) {
 
 // GetAllMotors indicates an expected call of GetAllMotors
 func (mr *MockMotorRepositoryMockRecorder) GetAllMotors() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAllMotors", reflect.TypeOf((*MockMotorRepository)(nil).GetAllMotors))
 }
