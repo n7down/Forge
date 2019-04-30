@@ -14,14 +14,13 @@ type BatteryResponse struct {
 }
 
 type Battery struct {
-	Db *sql.DB
 }
 
-func (b Battery) GetAll() ([]*BatteryResponse, error) {
+func (b Battery) GetAllBatteries(db *sql.DB) ([]*BatteryResponse, error) {
 	var err error
 
 	query := "SELECT id, name FROM battery"
-	rows, err := b.Db.Query(query)
+	rows, err := db.Query(query)
 	if err != nil {
 		return nil, err
 	}
@@ -41,9 +40,9 @@ func (b Battery) GetAll() ([]*BatteryResponse, error) {
 	return batteries, nil
 }
 
-func (b Battery) Add(in BatteryRequest) error {
+func (b Battery) AddBattery(db *sql.DB, in BatteryRequest) error {
 	var err error
 	query := "INSERT INTO battery (name) VALUES ($1)"
-	_, err = b.Db.Query(query, in.Name)
+	_, err = db.Query(query, in.Name)
 	return err
 }
