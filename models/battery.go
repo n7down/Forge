@@ -11,7 +11,6 @@ type BatteryResponse struct {
 
 func (r repository) GetAllBatteries() ([]*BatteryResponse, error) {
 	var err error
-
 	query := "SELECT id, name FROM battery"
 	rows, err := r.db.Query(query)
 	if err != nil {

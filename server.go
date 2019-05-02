@@ -8,12 +8,6 @@ import (
 )
 
 func main() {
-	//db, err := models.GetDB()
-	//if err != nil {
-	//fmt.Printf("error starting the database: %v", err.Error())
-	//return
-	//}
-
 	repository, err := models.NewRepository()
 	if err != nil {
 		fmt.Printf("error starting the database: %v", err.Error())
