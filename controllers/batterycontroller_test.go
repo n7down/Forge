@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	//"bytes"
+	"bytes"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -18,15 +18,14 @@ func TestGetBatteriesNoContent(t *testing.T) {
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 
-	db, _ := models.GetDB()
-	mockBatteryRepository := mocks.NewMockBatteryRepository(mockCtrl)
-	mockBatteryRepository.EXPECT().GetAllBatteries(db).Return(nil, nil)
+	mockRepository := mocks.NewMockRepository(mockCtrl)
+	mockRepository.EXPECT().GetAllBatteries().Return(nil, nil)
 
 	assert := assert.New(t)
 
 	gin.SetMode(gin.TestMode)
 
-	env := &Env{}
+	env := &Env{Repository: mockRepository}
 
 	router := gin.Default()
 	router.GET("/battery", env.GetBatteries)
@@ -42,70 +41,70 @@ func TestGetBatteriesNoContent(t *testing.T) {
 	assert.Equal(expectedStatusCode, w.Code, "Expected to get status %d but instead got %d\n", expectedStatusCode, w.Code)
 }
 
-//func TestGetBatteriesWithContent(t *testing.T) {
-//mockCtrl := gomock.NewController(t)
-//defer mockCtrl.Finish()
+func TestGetBatteriesWithContent(t *testing.T) {
+	mockCtrl := gomock.NewController(t)
+	defer mockCtrl.Finish()
 
-//mockBatteryRepository := mocks.NewMockBatteryRepository(mockCtrl)
+	mockRepository := mocks.NewMockRepository(mockCtrl)
 
-//batteries := make([]*models.BatteryResponse, 0)
-//batteries = append(batteries, &models.BatteryResponse{1, "test-battery0"})
-//batteries = append(batteries, &models.BatteryResponse{2, "test-battery1"})
+	batteries := make([]*models.BatteryResponse, 0)
+	batteries = append(batteries, &models.BatteryResponse{1, "test-battery0"})
+	batteries = append(batteries, &models.BatteryResponse{2, "test-battery1"})
 
-//mockBatteryRepository.EXPECT().GetAllBatteries().Return(batteries, nil)
+	mockRepository.EXPECT().GetAllBatteries().Return(batteries, nil)
 
-//assert := assert.New(t)
+	assert := assert.New(t)
 
-//gin.SetMode(gin.TestMode)
+	gin.SetMode(gin.TestMode)
 
-//env := &Env{}
+	env := &Env{Repository: mockRepository}
 
-//router := gin.Default()
-//router.GET("/battery", env.GetBatteries)
-//req, err := http.NewRequest(http.MethodGet, "/battery", nil)
+	router := gin.Default()
+	router.GET("/battery", env.GetBatteries)
+	req, err := http.NewRequest(http.MethodGet, "/battery", nil)
 
-//assert.Nil(err, "Couldn't create request: %v\n", err)
+	assert.Nil(err, "Couldn't create request: %v\n", err)
 
-//w := httptest.NewRecorder()
+	w := httptest.NewRecorder()
 
-//router.ServeHTTP(w, req)
+	router.ServeHTTP(w, req)
 
-//assert.Equal(w.Code, http.StatusOK, "Expected to get status %d but instead got %d\n", w.Code, http.StatusOK)
-//expected := "[{\"id\":1,\"name\":\"test-battery0\"},{\"id\":2,\"name\":\"test-battery1\"}]"
-//actual := w.Body.String()
-//assert.Equal(expected, actual, "Expected to get %v but instead got %v \n", expected, actual)
-//}
+	assert.Equal(w.Code, http.StatusOK, "Expected to get status %d but instead got %d\n", w.Code, http.StatusOK)
+	expected := "[{\"id\":1,\"name\":\"test-battery0\"},{\"id\":2,\"name\":\"test-battery1\"}]"
+	actual := w.Body.String()
+	assert.Equal(expected, actual, "Expected to get %v but instead got %v \n", expected, actual)
+}
 
-//func TestAddBattery(t *testing.T) {
-//mockCtrl := gomock.NewController(t)
-//defer mockCtrl.Finish()
+func TestAddBattery(t *testing.T) {
+	mockCtrl := gomock.NewController(t)
+	defer mockCtrl.Finish()
 
-//mockBatteryRepository := mocks.NewMockBatteryRepository(mockCtrl)
+	mockRepository := mocks.NewMockRepository(mockCtrl)
 
-//var battery models.BatteryRequest
-//battery.Name = "test-battery"
+	var battery models.BatteryRequest
+	battery.Name = "test-battery"
 
-//mockBatteryRepository.EXPECT().AddBattery(battery).Return(nil)
+	mockRepository.EXPECT().AddBattery(battery).Return(nil)
 
-//var jsonStr = []byte(`{"name":"test-battery"}`)
-//assert := assert.New(t)
+	var jsonStr = []byte(`{"name":"test-battery"}`)
+	assert := assert.New(t)
 
-//gin.SetMode(gin.TestMode)
+	gin.SetMode(gin.TestMode)
 
-//env := &Env{}
+	env := &Env{Repository: mockRepository}
 
-//router := gin.Default()
-//router.POST("/battery", env.AddBattery)
-//req, err := http.NewRequest(http.MethodPost, "/battery", bytes.NewBuffer(jsonStr))
+	router := gin.Default()
+	router.POST("/battery", env.AddBattery)
+	req, err := http.NewRequest(http.MethodPost, "/battery", bytes.NewBuffer(jsonStr))
 
-//assert.Nil(err, "Couldn't create request: %v\n", err)
+	assert.Nil(err, "Couldn't create request: %v\n", err)
 
-//w := httptest.NewRecorder()
+	w := httptest.NewRecorder()
 
-//router.ServeHTTP(w, req)
+	router.ServeHTTP(w, req)
 
-//assert.Equal(http.StatusOK, w.Code, "Expected to get status %d but instead got %d\n", http.StatusOK, w.Code)
-//expected := "{\"message\":\"battery created\"}"
-//actual := w.Body.String()
-//assert.Equal(expected, actual, "Expected to get %v but instead got %v \n", expected, actual)
-//}
+	assert.Equal(http.StatusOK, w.Code, "Expected to get status %d but instead got %d\n", http.StatusOK, w.Code)
+	expected := "{\"message\":\"battery created\"}"
+	actual := w.Body.String()
+	assert.Equal(expected, actual, "Expected to get %v but instead got %v \n", expected, actual)
+}

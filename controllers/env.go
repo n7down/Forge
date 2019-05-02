@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"database/sql"
+	"github.com/n7down/Forge/models"
 )
 
 type Env struct {
-	Db *sql.DB
+	Repository models.Repository
 }

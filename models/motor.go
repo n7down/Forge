@@ -1,9 +1,5 @@
 package models
 
-import (
-	"database/sql"
-)
-
 type MotorRequest struct {
 	Name string `json:"name"`
 }
@@ -13,15 +9,11 @@ type MotorResponse struct {
 	Name string `json:"name"`
 }
 
-type Motor struct {
-	Db *sql.DB
-}
-
-func (m Motor) GetAll() ([]*MotorResponse, error) {
+func (r repository) GetAllMotors() ([]*MotorResponse, error) {
 	var err error
 
 	query := "SELECT id, name FROM motor"
-	rows, err := m.Db.Query(query)
+	rows, err := r.db.Query(query)
 	if err != nil {
 		return nil, err
 	}
@@ -41,9 +33,9 @@ func (m Motor) GetAll() ([]*MotorResponse, error) {
 	return motors, nil
 }
 
-func (m Motor) Add(in MotorRequest) error {
+func (r repository) AddMotor(in MotorRequest) error {
 	var err error
 	query := "INSERT INTO motor (name) VALUES ($1)"
-	_, err = m.Db.Query(query, in.Name)
+	_, err = r.db.Query(query, in.Name)
 	return err
 }

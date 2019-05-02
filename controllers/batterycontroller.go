@@ -5,12 +5,10 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/n7down/Forge/models"
-
-	"database/sql"
 )
 
-func Get(c *gin.Context, db *sql.DB, r models.BatteryRepository) {
-	batteries, err := r.GetAllBatteries(db)
+func (e *Env) GetBatteries(c *gin.Context) {
+	batteries, err := e.Repository.GetAllBatteries()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
 	}
@@ -20,16 +18,10 @@ func Get(c *gin.Context, db *sql.DB, r models.BatteryRepository) {
 	c.JSON(http.StatusOK, batteries)
 }
 
-func (e *Env) GetBatteries(c *gin.Context) {
-	repository := models.Battery{}
-	Get(c, e.Db, repository)
-}
-
 func (e *Env) AddBattery(c *gin.Context) {
 	var in models.BatteryRequest
 	c.BindJSON(&in)
-	repository := models.Battery{}
-	err := repository.AddBattery(e.Db, in)
+	err := e.Repository.AddBattery(in)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
 	}

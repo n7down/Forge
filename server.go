@@ -8,7 +8,13 @@ import (
 )
 
 func main() {
-	db, err := models.GetDB()
+	//db, err := models.GetDB()
+	//if err != nil {
+	//fmt.Printf("error starting the database: %v", err.Error())
+	//return
+	//}
+
+	repository, err := models.NewRepository()
 	if err != nil {
 		fmt.Printf("error starting the database: %v", err.Error())
 		return
@@ -16,7 +22,7 @@ func main() {
 
 	router := gin.Default()
 
-	env := &controllers.Env{Db: db}
+	env := &controllers.Env{Repository: repository}
 
 	router.GET("/battery", env.GetBatteries)
 	router.POST("/battery", env.AddBattery)

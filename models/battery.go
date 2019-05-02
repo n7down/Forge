@@ -1,9 +1,5 @@
 package models
 
-import (
-	"database/sql"
-)
-
 type BatteryRequest struct {
 	Name string `json:"name"`
 }
@@ -13,14 +9,11 @@ type BatteryResponse struct {
 	Name string `json:"name"`
 }
 
-type Battery struct {
-}
-
-func (b Battery) GetAllBatteries(db *sql.DB) ([]*BatteryResponse, error) {
+func (r repository) GetAllBatteries() ([]*BatteryResponse, error) {
 	var err error
 
 	query := "SELECT id, name FROM battery"
-	rows, err := db.Query(query)
+	rows, err := r.db.Query(query)
 	if err != nil {
 		return nil, err
 	}
@@ -40,9 +33,9 @@ func (b Battery) GetAllBatteries(db *sql.DB) ([]*BatteryResponse, error) {
 	return batteries, nil
 }
 
-func (b Battery) AddBattery(db *sql.DB, in BatteryRequest) error {
+func (r repository) AddBattery(in BatteryRequest) error {
 	var err error
 	query := "INSERT INTO battery (name) VALUES ($1)"
-	_, err = db.Query(query, in.Name)
+	_, err = r.db.Query(query, in.Name)
 	return err
 }
