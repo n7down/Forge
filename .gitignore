@@ -14,3 +14,6 @@
 src/main
 .vscode/
 main
+
+*.swo
+*.swp

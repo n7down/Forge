@@ -7,7 +7,7 @@ import (
 	"github.com/n7down/Forge/models"
 )
 
-func (e *Env) GetBatteries(c *gin.Context) {
+func (e *BatteryEnv) GetBatteries(c *gin.Context) {
 	batteries, err := e.Repository.GetAllBatteries()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
@@ -18,7 +18,7 @@ func (e *Env) GetBatteries(c *gin.Context) {
 	c.JSON(http.StatusOK, batteries)
 }
 
-func (e *Env) AddBattery(c *gin.Context) {
+func (e *BatteryEnv) AddBattery(c *gin.Context) {
 	var in models.BatteryRequest
 	c.BindJSON(&in)
 	err := e.Repository.AddBattery(in)

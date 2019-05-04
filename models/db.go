@@ -27,7 +27,21 @@ func getEnv(key, fallback string) string {
 	return fallback
 }
 
-func NewRepository() (Repository, error) {
+//func NewRepository() (Repository, error) {
+//dbUser := "postgres"
+//dbPassword := "postgres"
+//dbName := "forge"
+//dbHost := getEnv("DB_HOST", "localhost")
+//connectionString := "postgres://" + dbUser + ":" + dbPassword + "@" + dbHost + "/" + dbName + "?sslmode=disable"
+
+//db, err := sql.Open("postgres", connectionString)
+//if err != nil {
+//return nil, err
+//}
+//return &repository{db: db}, nil
+//}
+
+func GetDB() (*sql.DB, error) {
 	dbUser := "postgres"
 	dbPassword := "postgres"
 	dbName := "forge"
@@ -38,5 +52,5 @@ func NewRepository() (Repository, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &repository{db: db}, nil
+	return db, nil
 }

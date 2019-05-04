@@ -4,6 +4,6 @@ import (
 	"github.com/n7down/Forge/models"
 )
 
-type BatteryEnv struct {
+type Env struct {
 	Repository models.BatteryRepository
 }

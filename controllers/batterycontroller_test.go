@@ -18,14 +18,14 @@ func TestGetBatteriesNoContent(t *testing.T) {
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 
-	mockRepository := mocks.NewMockRepository(mockCtrl)
+	mockRepository := mocks.NewMockBatteryRepository(mockCtrl)
 	mockRepository.EXPECT().GetAllBatteries().Return(nil, nil)
 
 	assert := assert.New(t)
 
 	gin.SetMode(gin.TestMode)
 
-	env := &Env{Repository: mockRepository}
+	env := &BatteryEnv{Repository: mockRepository}
 
 	router := gin.Default()
 	router.GET("/battery", env.GetBatteries)
@@ -45,7 +45,7 @@ func TestGetBatteriesWithContent(t *testing.T) {
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 
-	mockRepository := mocks.NewMockRepository(mockCtrl)
+	mockRepository := mocks.NewMockBatteryRepository(mockCtrl)
 
 	batteries := make([]*models.BatteryResponse, 0)
 	batteries = append(batteries, &models.BatteryResponse{1, "test-battery0"})
@@ -57,7 +57,7 @@ func TestGetBatteriesWithContent(t *testing.T) {
 
 	gin.SetMode(gin.TestMode)
 
-	env := &Env{Repository: mockRepository}
+	env := &BatteryEnv{Repository: mockRepository}
 
 	router := gin.Default()
 	router.GET("/battery", env.GetBatteries)
@@ -79,7 +79,7 @@ func TestAddBattery(t *testing.T) {
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 
-	mockRepository := mocks.NewMockRepository(mockCtrl)
+	mockRepository := mocks.NewMockBatteryRepository(mockCtrl)
 
 	var battery models.BatteryRequest
 	battery.Name = "test-battery"
@@ -91,7 +91,7 @@ func TestAddBattery(t *testing.T) {
 
 	gin.SetMode(gin.TestMode)
 
-	env := &Env{Repository: mockRepository}
+	env := &BatteryEnv{Repository: mockRepository}
 
 	router := gin.Default()
 	router.POST("/battery", env.AddBattery)
